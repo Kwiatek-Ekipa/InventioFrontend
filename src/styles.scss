@@ -6,7 +6,17 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Montserrat', sans-serif;
   font-family: 'Montserrat', sans-serif, 'primeicons';
 }
+
+a {
+  color: var(--p-primary-500);
+}
+
+button {
+  font-weight: bold;
+}
+
+.error {
+  color: var(--p-red-500);
 }
