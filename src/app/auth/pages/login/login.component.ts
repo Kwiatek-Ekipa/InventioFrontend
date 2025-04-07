@@ -33,5 +33,7 @@ export class LoginComponent {
       this.form.markAllAsTouched();
       return;
     }
+
+    //TODO: connect with api when api is ready
   }
 }
