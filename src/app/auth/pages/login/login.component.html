@@ -1,0 +1,29 @@
+<auth-background>
+  <p-card>
+    <div class="container">
+      <img src="/assets/logo.svg" alt="Logo of Inventio" class="logo">
+      <h2>Zaloguj się</h2>
+      <form [formGroup]="form" (submit)="handleSubmit()" class="form">
+        <span>
+          <ui-label label="Login" for="login">
+            <input pInputText type="text" formControlName="login" id="login" class="input">
+          </ui-label>
+          @if (form.get('login')?.invalid && form.get('login')?.touched) {
+            <small class="error">Login nie może być pusty.</small>
+          }
+        </span>
+        <span>
+          <ui-label label="Hasło" for="password">
+            <p-password id="password" formControlName="password" toggleMask feedback="false" class="input" fluid/>
+          </ui-label>
+          @if (form.get('password')?.invalid && form.get('password')?.touched) {
+            <small class="error">Hasło nie może być puste.</small>
+          }
+        </span>
+        <a href="/reset-password" class="reset-password">Zapomniałeś hasła?</a>
+        <p-button fluid type="submit">Zaloguj się</p-button>
+      </form>
+      <a rel="stylesheet" href="/sign-up">Zarejestruj się</a>
+    </div>
+  </p-card>
+</auth-background>
