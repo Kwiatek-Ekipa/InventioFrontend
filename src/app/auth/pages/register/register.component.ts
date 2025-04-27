@@ -8,16 +8,6 @@ import {UILabelComponent} from '@ui/label/label.component';
 import {BackgroundComponent} from '../../components/background/background.component';
 import {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
 
-export const passwordMatchValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
-  const password = control.get('password')?.value;
-  const passwordConfirmation = control.get('passwordConfirmation')?.value;
-
-  if (password !== passwordConfirmation) {
-    return { passwordMismatch: true };
-  }
-
-  return null;
-};
 
 @Component({
   selector: 'auth-login',
@@ -37,11 +27,22 @@ export const passwordMatchValidator: ValidatorFn = (control: AbstractControl): V
 
 export class RegisterComponent {
 
+  private passwordMatchValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+    const password = control.get('password')?.value;
+    const passwordConfirmation = control.get('passwordConfirmation')?.value;
+
+    if (password !== passwordConfirmation) {
+      return { passwordMismatch: true };
+    }
+
+    return null;
+  };
+
   public form: FormGroup = new FormGroup({
     login: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
     passwordConfirmation: new FormControl('', Validators.required)
-  }, { validators: passwordMatchValidator });
+  }, { validators: this.passwordMatchValidator });
 
 
   public handleSubmit(): void {
