@@ -4,7 +4,7 @@ import {Card} from 'primeng/card';
 import {InputText} from 'primeng/inputtext';
 import {Password} from 'primeng/password';
 import {Button} from 'primeng/button';
-import {UILabelComponent} from '@ui/label/label.component';
+import {UILabelComponent} from '@ui';
 import {BackgroundComponent} from '../../components/background/background.component';
 
 @Component({
@@ -18,10 +18,10 @@ import {BackgroundComponent} from '../../components/background/background.compon
     ReactiveFormsModule,
     Button
   ],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  templateUrl: './login-page.component.html',
+  styleUrl: './login-page.component.scss'
 })
-export class LoginComponent {
+export class LoginPageComponent {
 
   public form: FormGroup = new FormGroup({
     login: new FormControl('', Validators.required),

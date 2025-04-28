@@ -1,10 +1,11 @@
 import {ApplicationConfig, provideZoneChangeDetection} from '@angular/core';
-import {provideRouter} from '@angular/router';
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
+import {provideRouter} from '@angular/router';
 import {providePrimeNG} from 'primeng/config';
 
+import {ThemePreset} from '@core/theme/preset';
+
 import {routes} from './app.routes';
-import {ThemePreset} from './theme/preset';
 
 export const appConfig: ApplicationConfig = {
   providers: [
