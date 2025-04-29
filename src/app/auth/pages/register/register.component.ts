@@ -29,7 +29,7 @@ export class RegisterComponent {
     login: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
     passwordConfirmation: new FormControl('', Validators.required)
-  }, { validators: passwordMatchValidator });
+  }, { validators: passwordMatchValidator, updateOn: 'submit' });
 
 
   public handleSubmit(): void {

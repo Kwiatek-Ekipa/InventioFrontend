@@ -26,7 +26,7 @@ export class LoginComponent {
   public form: FormGroup = new FormGroup({
     login: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required)
-  });
+  }, { updateOn: 'submit' });
 
   public handleSubmit(): void {
     if (this.form.invalid) {
