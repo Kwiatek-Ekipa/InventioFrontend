@@ -1,0 +1,40 @@
+<auth-background>
+  <p-card>
+    <div class="container">
+      <img src="/assets/logo.svg" alt="Logo of Inventio" class="logo">
+      <h2>Zarejestruj się</h2>
+      <form [formGroup]="form" (submit)="handleSubmit()" class="form">
+        <span>
+          <ui-label label="Login" for="login">
+            <input pInputText type="text" formControlName="login" id="login" class="input">
+          </ui-label>
+          @if (form.get('login')?.invalid && form.get('login')?.touched) {
+            <small class="error">Login nie może być pusty.</small>
+          }
+        </span>
+        <span>
+          <ui-label label="Hasło" for="password">
+            <p-password id="password" formControlName="password" toggleMask feedback="false" class="input" fluid/>
+          </ui-label>
+          @if (form.get('password')?.invalid && form.get('password')?.touched) {
+            <small class="error">Hasło nie może być puste.</small>
+          }
+        </span>
+        <span>
+          <ui-label label="Powtórz hasło" for="passwordConfirmation">
+            <p-password id="passwordConfirmation" formControlName="passwordConfirmation" toggleMask feedback="false" class="input" fluid/>
+          </ui-label>
+          @if (form.get('passwordConfirmation')?.invalid && form.get('passwordConfirmation')?.touched) {
+            <small class="error">Powtórz hasło.</small>
+          }
+          @if (form.hasError('passwordMismatch') && form.get('passwordConfirmation')?.touched) {
+            <small class="error">Hasła się nie zgadzają.</small>
+          }
+
+        </span>
+        <p-button fluid type="submit" [disabled]="form.invalid || form.pending">Zarejestruj się</p-button>
+      </form>
+      <a rel="stylesheet" href="/sign-in">Zaloguj się</a>
+    </div>
+  </p-card>
+</auth-background>

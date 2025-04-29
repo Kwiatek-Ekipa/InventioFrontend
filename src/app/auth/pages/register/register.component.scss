@@ -1,0 +1,26 @@
+.container {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem 0;
+
+  .logo {
+    margin: 0 auto;
+    height: 4rem;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .input {
+      width: 100%;
+    }
+
+    .reset-password {
+      text-align: right;
+    }
+  }
+}
