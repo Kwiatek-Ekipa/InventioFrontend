@@ -4,9 +4,10 @@ import {Card} from 'primeng/card';
 import {InputText} from 'primeng/inputtext';
 import {Password} from 'primeng/password';
 import {Button} from 'primeng/button';
+
 import {UILabelComponent} from '@ui/label/label.component';
+import {passwordMatchValidator} from '../../validators';
 import {BackgroundComponent} from '../../components/background/background.component';
-import {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
 
 
 @Component({
@@ -23,26 +24,12 @@ import {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
-
-
 export class RegisterComponent {
-
-  private passwordMatchValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
-    const password = control.get('password')?.value;
-    const passwordConfirmation = control.get('passwordConfirmation')?.value;
-
-    if (password !== passwordConfirmation) {
-      return { passwordMismatch: true };
-    }
-
-    return null;
-  };
-
   public form: FormGroup = new FormGroup({
     login: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
     passwordConfirmation: new FormControl('', Validators.required)
-  }, { validators: this.passwordMatchValidator });
+  }, { validators: passwordMatchValidator });
 
 
   public handleSubmit(): void {
