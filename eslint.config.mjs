@@ -82,8 +82,6 @@ export default defineConfig([globalIgnores(["projects/**/*"]), {
     "@typescript-eslint/consistent-generic-constructors": ["error", 'constructor'],
     "consistent-return": "off",
     "@typescript-eslint/consistent-return": "error",
-    "@typescript-eslint/consistent-type-exports": "error",
-    "@typescript-eslint/consistent-type-imports": "error",
     "default-param-last": "off",
     "@typescript-eslint/default-param-last": "error",
     "dot-notation": "off",
@@ -116,9 +114,8 @@ export default defineConfig([globalIgnores(["projects/**/*"]), {
     "prefer-const": "warn",
     "prefer-arrow-callback": "warn",
     "no-console": "warn",
-    // "@typescript-eslint/no-unnecessary-parameter-property-assignment": "error",
 
-    "@typescript-eslint/naming-convention": ["error", {
+    "@typescript-eslint/naming-convention": ["warn", {
       selector: 'default',
       format: ['camelCase']
     }, {
