@@ -4,8 +4,11 @@ import {Card} from 'primeng/card';
 import {InputText} from 'primeng/inputtext';
 import {Password} from 'primeng/password';
 import {Button} from 'primeng/button';
-import {UILabelComponent} from '@ui';
+
+import {UILabelComponent} from '@ui/label/label.component';
+import {passwordMatchValidator} from '../../validators';
 import {BackgroundComponent} from '../../components/background/background.component';
+
 
 @Component({
   selector: 'auth-login',
@@ -18,15 +21,16 @@ import {BackgroundComponent} from '../../components/background/background.compon
     ReactiveFormsModule,
     Button
   ],
-  templateUrl: './login-page.component.html',
-  styleUrl: './login-page.component.scss'
+  templateUrl: './register.component.html',
+  styleUrl: './register.component.scss'
 })
-export class LoginPageComponent {
-
+export class RegisterComponent {
   public form: FormGroup = new FormGroup({
     login: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required)
-  }, { updateOn: 'submit' });
+    password: new FormControl('', Validators.required),
+    passwordConfirmation: new FormControl('', Validators.required)
+  }, { validators: passwordMatchValidator, updateOn: 'submit' });
+
 
   public handleSubmit(): void {
     if (this.form.invalid) {
@@ -37,3 +41,4 @@ export class LoginPageComponent {
     //TODO: connect with api when api is ready
   }
 }
+
