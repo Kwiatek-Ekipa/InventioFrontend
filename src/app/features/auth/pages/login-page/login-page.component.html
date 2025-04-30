@@ -1,12 +1,12 @@
 <auth-background>
   <p-card>
     <div class="container">
-      <img src="/assets/logo.svg" alt="Logo of Inventio" class="logo">
+      <img src="/assets/logo.svg" alt="Logo of Inventio" class="logo"/>
       <h2>Zaloguj się</h2>
       <form [formGroup]="form" (submit)="handleSubmit()" class="form">
         <span>
           <ui-label label="Login" for="login">
-            <input pInputText type="text" formControlName="login" id="login" class="input">
+            <input pInputText type="text" formControlName="login" id="login" class="input"/>
           </ui-label>
           @if (form.get('login')?.invalid && form.get('login')?.touched) {
             <small class="error">Login nie może być pusty.</small>

@@ -1,14 +1,15 @@
-import {ApplicationConfig, provideZoneChangeDetection} from '@angular/core';
-import {provideRouter} from '@angular/router';
-import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
-import {providePrimeNG} from 'primeng/config';
+import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { provideRouter } from '@angular/router';
+import { providePrimeNG } from 'primeng/config';
 
-import {routes} from './app.routes';
-import {ThemePreset} from './theme/preset';
+import { ThemePreset } from '@core/theme/preset';
+
+import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZoneChangeDetection({eventCoalescing: true}),
+    provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideAnimationsAsync(),
     providePrimeNG({
@@ -16,9 +17,9 @@ export const appConfig: ApplicationConfig = {
       theme: {
         preset: ThemePreset,
         options: {
-          darkModeSelector: false
-        }
-      }
-    })
-  ]
+          darkModeSelector: false,
+        },
+      },
+    }),
+  ],
 };
