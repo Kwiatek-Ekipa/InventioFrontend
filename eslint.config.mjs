@@ -1,28 +1,29 @@
-import {defineConfig, globalIgnores} from "eslint/config";
+import { defineConfig, globalIgnores } from "eslint/config";
 import path from "node:path";
-import {fileURLToPath} from "node:url";
+import { fileURLToPath } from "node:url";
 import js from "@eslint/js";
 import stylisticJs from '@stylistic/eslint-plugin-js'
-import {FlatCompat} from "@eslint/eslintrc";
+import { FlatCompat } from "@eslint/eslintrc";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const compat = new FlatCompat({
   baseDirectory: __dirname,
   recommendedConfig: js.configs.recommended,
-  allConfig: js.configs.all
+  allConfig: js.configs.all,
 });
 
 export default defineConfig([globalIgnores(["projects/**/*"]), {
   files: ["**/*.ts"],
 
   plugins: {
-    "@stylistic/js": stylisticJs
+    "@stylistic/js": stylisticJs,
   },
 
   extends: compat.extends(
     "plugin:@angular-eslint/recommended",
     "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
   ),
 
   languageOptions: {
@@ -38,43 +39,44 @@ export default defineConfig([globalIgnores(["projects/**/*"]), {
   settings: {},
 
   rules: {
+    'prettier/prettier': 'warn',
     '@stylistic/js/indent': ['warn', 2],
     "@stylistic/js/padding-line-between-statements": ["warn",
       {
         "blankLine": "always",
         "prev": "*",
-        "next": "return"
+        "next": "return",
       },
       {
         "blankLine": "always",
         "prev": "let",
-        "next": "*"
+        "next": "*",
       },
       {
         "blankLine": "always",
         "prev": "const",
-        "next": "*"
+        "next": "*",
       },
       {
         "blankLine": "any",
         "prev": "const",
-        "next": "let"
+        "next": "let",
       },
       {
         "blankLine": "any",
         "prev": "let",
-        "next": "const"
+        "next": "const",
       },
       {
         "blankLine": "any",
         "prev": "const",
-        "next": "const"
+        "next": "const",
       },
       {
         "blankLine": "any",
         "prev": "let",
-        "next": "let"
-      }
+        "next": "let",
+      },
     ],
     "@typescript-eslint/adjacent-overload-signatures": "error",
     "@typescript-eslint/array-type": "error",
@@ -117,7 +119,7 @@ export default defineConfig([globalIgnores(["projects/**/*"]), {
 
     "@typescript-eslint/naming-convention": ["warn", {
       selector: 'default',
-      format: ['camelCase']
+      format: ['camelCase'],
     }, {
       selector: ['property', 'method'],
       modifiers: ['#private', 'private'],
@@ -127,18 +129,18 @@ export default defineConfig([globalIgnores(["projects/**/*"]), {
       selector: ['property', 'method'],
       modifiers: ['protected'],
       format: ['camelCase'],
-      prefix: ['$']
+      prefix: ['$'],
     }, {
       selector: ['class', 'typeLike', 'enum', 'interface'],
-      format: ['PascalCase']
+      format: ['PascalCase'],
     }, {
       selector: ['enumMember'],
-      format: ['UPPER_CASE']
+      format: ['UPPER_CASE'],
     }, {
       selector: ['variable', 'property'],
       format: ['PascalCase'],
       types: ['boolean'],
-      prefix: ['is', 'has', 'can', 'should'],
+      prefix: ['is', 'are', 'has', 'can', 'show', 'should', 'needs', 'must'],
     }],
 
     "@typescript-eslint/member-ordering": ["error", {
@@ -249,9 +251,7 @@ export default defineConfig([globalIgnores(["projects/**/*"]), {
         "decorated-method",
 
         "method",
-      ]
-    }]
-
-
+      ],
+    }],
   },
 }]);
