@@ -34,7 +34,7 @@
           @if (form.get('passwordConfirmation')?.invalid && form.get('passwordConfirmation')?.touched) {
             <small class="error">Powtórz hasło.</small>
           }
-          @if (form.hasError('isPasswordMatching') && form.get('passwordConfirmation')?.touched) {
+          @if (form.hasError('isPasswordMismatch') && form.get('passwordConfirmation')?.touched) {
             <small class="error">Hasła się nie zgadzają.</small>
           }
         </span>
