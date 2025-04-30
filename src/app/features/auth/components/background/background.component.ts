@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'auth-background',
   imports: [],
   templateUrl: './background.component.html',
-  styleUrl: './background.component.scss'
+  styleUrl: './background.component.scss',
 })
-export class BackgroundComponent {
-
-}
+export class BackgroundComponent {}

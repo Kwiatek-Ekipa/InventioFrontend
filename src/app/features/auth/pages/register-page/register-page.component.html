@@ -1,12 +1,12 @@
 <auth-background>
   <p-card>
     <div class="container">
-      <img alt="Logo of Inventio" class="logo" src="/assets/logo.svg">
+      <img alt="Logo of Inventio" class="logo" src="/assets/logo.svg"/>
       <h2>Zarejestruj się</h2>
       <form (submit)="handleSubmit()" [formGroup]="form" class="form">
         <span>
           <ui-label for="login" label="Login">
-            <input class="input" formControlName="login" id="login" pInputText type="text">
+            <input class="input" formControlName="login" id="login" pInputText type="text"/>
           </ui-label>
           @if (form.get('login')?.invalid && form.get('login')?.touched) {
             <small class="error">Login nie może być pusty.</small>
@@ -22,8 +22,14 @@
         </span>
         <span>
           <ui-label for="passwordConfirmation" label="Powtórz hasło">
-            <p-password class="input" feedback="false" fluid formControlName="passwordConfirmation"
-                        id="passwordConfirmation" toggleMask/>
+            <p-password
+                    class="input"
+                    feedback="false"
+                    fluid
+                    formControlName="passwordConfirmation"
+                    id="passwordConfirmation"
+                    toggleMask
+            />
           </ui-label>
           @if (form.get('passwordConfirmation')?.invalid && form.get('passwordConfirmation')?.touched) {
             <small class="error">Powtórz hasło.</small>
@@ -31,7 +37,6 @@
           @if (form.hasError('isPasswordMatching') && form.get('passwordConfirmation')?.touched) {
             <small class="error">Hasła się nie zgadzają.</small>
           }
-
         </span>
         <p-button fluid type="submit">Zarejestruj się</p-button>
       </form>

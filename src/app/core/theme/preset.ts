@@ -1,4 +1,4 @@
-import {definePreset} from '@primeng/themes';
+import { definePreset } from '@primeng/themes';
 import Aura from '@primeng/themes/aura';
 
 export const ThemePreset = definePreset(Aura, {
@@ -14,7 +14,7 @@ export const ThemePreset = definePreset(Aura, {
       700: '{teal.700}',
       800: '{teal.800}',
       900: '{teal.900}',
-      950: '{teal.950}'
+      950: '{teal.950}',
     },
 
     colorScheme: {
@@ -23,7 +23,7 @@ export const ThemePreset = definePreset(Aura, {
         inverseColor: '{teal.50}',
         hoverColor: '{teal.500}',
         activeColor: '{teal.600}',
-      }
-    }
-  }
+      },
+    },
+  },
 });
