@@ -1,15 +1,15 @@
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
-import { Card } from 'primeng/card';
 import { InputText } from 'primeng/inputtext';
 import { Password } from 'primeng/password';
 import { Button } from 'primeng/button';
 import { UILabelComponent } from '@ui';
 import { BackgroundComponent } from '../../components/background/background.component';
+import { CardComponent } from '@features/auth/components/card/card.component';
 
 @Component({
   selector: 'auth-login',
-  imports: [BackgroundComponent, Card, UILabelComponent, InputText, Password, ReactiveFormsModule, Button],
+  imports: [BackgroundComponent, UILabelComponent, InputText, Password, ReactiveFormsModule, Button, CardComponent],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss',
 })
@@ -19,7 +19,7 @@ export class LoginPageComponent {
       login: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required),
     },
-    { updateOn: 'submit' }
+    { updateOn: 'blur' }
   );
 
   public handleSubmit(): void {

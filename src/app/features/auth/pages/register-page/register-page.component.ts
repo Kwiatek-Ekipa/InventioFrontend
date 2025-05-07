@@ -1,6 +1,5 @@
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
-import { Card } from 'primeng/card';
 import { InputText } from 'primeng/inputtext';
 import { Password } from 'primeng/password';
 import { Button } from 'primeng/button';
@@ -8,10 +7,11 @@ import { Button } from 'primeng/button';
 import { UILabelComponent } from '@ui/label/label.component';
 import { passwordMatchValidator } from '../../validators';
 import { BackgroundComponent } from '../../components/background/background.component';
+import { CardComponent } from '@features/auth/components/card/card.component';
 
 @Component({
   selector: 'auth-register',
-  imports: [BackgroundComponent, Card, UILabelComponent, InputText, Password, ReactiveFormsModule, Button],
+  imports: [BackgroundComponent, UILabelComponent, InputText, Password, ReactiveFormsModule, Button, CardComponent],
   templateUrl: './register-page.component.html',
   styleUrl: './register-page.component.scss',
 })
@@ -22,7 +22,7 @@ export class RegisterPageComponent {
       password: new FormControl('', Validators.required),
       passwordConfirmation: new FormControl('', Validators.required),
     },
-    { validators: passwordMatchValidator, updateOn: 'submit' }
+    { validators: passwordMatchValidator, updateOn: 'change' }
   );
 
   public handleSubmit(): void {

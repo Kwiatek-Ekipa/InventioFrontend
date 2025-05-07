@@ -1,0 +1,12 @@
+.container {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem 0;
+
+  .logo {
+    margin: 0 auto;
+    height: 4rem;
+  }
+}
