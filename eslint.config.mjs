@@ -106,7 +106,6 @@ export default defineConfig([globalIgnores(["projects/**/*"]), {
     "no-var": "error",
     "@typescript-eslint/prefer-find": "warn",
     "@typescript-eslint/prefer-includes": "error",
-    "@typescript-eslint/prefer-readonly": "warn",
     "@typescript-eslint/prefer-reduce-type-parameter": "warn",
     "@typescript-eslint/require-array-sort-compare": "warn",
 
@@ -121,12 +120,12 @@ export default defineConfig([globalIgnores(["projects/**/*"]), {
       selector: 'default',
       format: ['camelCase'],
     }, {
-      selector: ['property', 'method'],
-      modifiers: ['#private', 'private'],
-      format: ['camelCase'],
+      selector: ['memberLike'],
+      modifiers: ['private'],
       leadingUnderscore: 'require',
+      format: ['camelCase'],
     }, {
-      selector: ['property', 'method'],
+      selector: ['memberLike'],
       modifiers: ['protected'],
       format: ['camelCase'],
       prefix: ['$'],
