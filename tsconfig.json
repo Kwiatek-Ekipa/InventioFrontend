@@ -19,7 +19,9 @@
     "module": "ES2022",
     "baseUrl": "src/",
     "paths": {
-      "@env": ["environments/environments.ts"],
+      "@env": [
+        "environments/environment.ts"
+      ],
       "@core/*": ["app/core/*"],
       "@features/*": ["app/features/*"],
       "@shared/*": ["app/shared/*"],
