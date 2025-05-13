@@ -2,19 +2,29 @@
   <auth-card label="Zaloguj się">
     <form [formGroup]="form" (submit)="handleSubmit()" class="form">
       <span>
-        <ui-label label="Login" for="login">
-          <input pInputText type="text" formControlName="login" id="login" fluid/>
-        </ui-label>
-        @if (form.get('login')?.invalid && form.get('login')?.touched) {
-          <small class="error">Login nie może być pusty.</small>
+        @let email = form.get('email');
+        @if (email) {
+          <ui-label label="Email" for="email">
+            <input pInputText type="email" formControlName="email" id="email" fluid />
+          </ui-label>
+          @if (email.invalid && email.touched) {
+            @if (email.errors?.['email']) {
+              <small class="error">Email musi być poprawny.</small>
+            } @else {
+              <small class="error">Email nie może być pusty.</small>
+            }
+          }
         }
       </span>
       <span>
-        <ui-label label="Hasło" for="password">
-          <p-password id="password" formControlName="password" toggleMask feedback="false" fluid/>
-        </ui-label>
-        @if (form.get('password')?.invalid && form.get('password')?.touched) {
-          <small class="error">Hasło nie może być puste.</small>
+        @let password = form.get('password');
+        @if (password) {
+          <ui-label label="Hasło" for="password">
+            <p-password id="password" formControlName="password" toggleMask feedback="false" fluid />
+          </ui-label>
+          @if (password.invalid && password.touched) {
+            <small class="error">Hasło nie może być puste.</small>
+          }
         }
       </span>
       <p class="reset-password">

@@ -2,37 +2,81 @@
   <auth-card label="Zarejestruj się">
     <form (submit)="handleSubmit()" [formGroup]="form" class="form">
       <span>
-        <ui-label for="login" label="Login">
-          <input class="input" formControlName="login" id="login" pInputText type="text" fluid/>
+        @let name = form.get('name');
+        <ui-label for="name" label="Imię">
+          <input class="input" formControlName="name" id="name" pInputText type="text" fluid />
         </ui-label>
-        @if (form.get('login')?.invalid && form.get('login')?.touched) {
-          <small class="error">Login nie może być pusty.</small>
+        @if (name?.invalid && name?.touched) {
+          <small class="error">Imię nie może być puste.</small>
         }
       </span>
       <span>
-        <ui-label for="password" label="Hasło">
-          <p-password class="input" feedback="false" fluid formControlName="password" id="password" toggleMask/>
-        </ui-label>
-        @if (form.get('password')?.invalid && form.get('password')?.touched) {
-          <small class="error">Hasło nie może być puste.</small>
+        @let surname = form.get('surname');
+        @if (surname) {
+          <ui-label for="surname" label="Nazwisko">
+            <input class="input" formControlName="surname" id="surname" pInputText type="text" fluid />
+          </ui-label>
+          @if (surname.invalid && surname.touched) {
+            <small class="error">Nazwisko nie może być puste.</small>
+          }
         }
       </span>
       <span>
-        <ui-label for="passwordConfirmation" label="Powtórz hasło">
-          <p-password
+        @let email = form.get('email');
+        @if (email) {
+          <ui-label for="email" label="Email">
+            <input class="input" formControlName="email" id="email" pInputText type="email" fluid />
+          </ui-label>
+          @if (email.invalid && email.touched) {
+            @if (email.errors?.['email']) {
+              <small class="error">Email musi być poprawny.</small>
+            } @else {
+              <small class="error">Email nie może być pusty.</small>
+            }
+          }
+        }
+      </span>
+      <span>
+        @let password = form.get('password');
+        @if (password) {
+          <ui-label for="password" label="Hasło">
+            <p-password class="input" feedback="false" fluid formControlName="password" id="password" toggleMask />
+          </ui-label>
+          @if (password.invalid && password.touched) {
+            @if (password.hasError('minlength')) {
+              <small class="error">
+                Hasło nie może być krótsze niż {{ password.errors?.['minlength'].requiredLength }} znaków.
+              </small>
+            } @else if (password.hasError('pattern')) {
+              <small class="error">
+                Hasło musi zawierać co najmniej jedną wielką literę, małą literę, cyfrę i znak specjalny.
+              </small>
+            } @else {
+              <small class="error">Hasło nie może być puste.</small>
+            }
+          }
+        }
+      </span>
+      <span>
+        @let passwordConfirmation = form.get('passwordConfirmation');
+        @if (passwordConfirmation) {
+          <ui-label for="passwordConfirmation" label="Powtórz hasło">
+            <p-password
               class="input"
               feedback="false"
               fluid
               formControlName="passwordConfirmation"
               id="passwordConfirmation"
               toggleMask
-          />
-        </ui-label>
-        @if (form.get('passwordConfirmation')?.invalid && form.get('passwordConfirmation')?.touched) {
-          <small class="error">Powtórz hasło.</small>
-        }
-        @if (form.hasError('isPasswordMismatch') && form.get('passwordConfirmation')?.touched) {
-          <small class="error">Hasła się nie zgadzają.</small>
+            />
+          </ui-label>
+          @if (passwordConfirmation.invalid && passwordConfirmation.touched) {
+            @if (form.hasError('isPasswordMismatch')) {
+              <small class="error">Hasła się nie zgadzają.</small>
+            } @else {
+              <small class="error">Powtórz hasło.</small>
+            }
+          }
         }
       </span>
       <p-button fluid type="submit">Zarejestruj się</p-button>

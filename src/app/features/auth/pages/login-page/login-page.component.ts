@@ -1,11 +1,12 @@
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { InputText } from 'primeng/inputtext';
 import { Password } from 'primeng/password';
 import { Button } from 'primeng/button';
 import { UILabelComponent } from '@ui';
-import { BackgroundComponent } from '../../components/background/background.component';
-import { CardComponent } from '@features/auth/components/card/card.component';
+import { BackgroundComponent, CardComponent } from '@features/auth/components';
+import { AuthService } from '@core/services/auth.service';
+import { LoginInterface } from '@core/interfaces';
 
 @Component({
   selector: 'auth-login',
@@ -14,13 +15,11 @@ import { CardComponent } from '@features/auth/components/card/card.component';
   styleUrl: './login-page.component.scss',
 })
 export class LoginPageComponent {
-  public form: FormGroup = new FormGroup(
-    {
-      login: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required),
-    },
-    { updateOn: 'blur' }
-  );
+  public form: FormGroup = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', Validators.required),
+  });
+  private _authService: AuthService = inject(AuthService);
 
   public handleSubmit(): void {
     if (this.form.invalid) {
@@ -29,6 +28,8 @@ export class LoginPageComponent {
       return;
     }
 
-    //TODO: connect with api when api is ready
+    const userCredentials = this.form.value as LoginInterface;
+
+    this._authService.login(userCredentials).pipe().subscribe();
   }
 }
