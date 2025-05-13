@@ -3,10 +3,11 @@ import { Component, inject } from '@angular/core';
 import { InputText } from 'primeng/inputtext';
 import { Password } from 'primeng/password';
 import { Button } from 'primeng/button';
+
 import { UILabelComponent } from '@ui';
-import { BackgroundComponent, CardComponent } from '@features/auth/components';
-import { AuthService } from '@core/services/auth.service';
+import { AuthService } from '@core/services';
 import { LoginInterface } from '@core/interfaces';
+import { BackgroundComponent, CardComponent } from '@features/auth/components';
 
 @Component({
   selector: 'auth-login',

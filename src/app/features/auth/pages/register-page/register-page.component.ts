@@ -5,10 +5,10 @@ import { InputText } from 'primeng/inputtext';
 import { Password } from 'primeng/password';
 import { Button } from 'primeng/button';
 
-import { UILabelComponent } from '@ui/label/label.component';
-import { passwordMatchValidator } from '../../validators';
-import { AuthApiService } from '@core/services/auth-api.service';
+import { AuthApiService } from '@core/services';
+import { UILabelComponent } from '@ui';
 import { BackgroundComponent, CardComponent } from '@features/auth/components';
+import { passwordMatchValidator } from '@features/auth/validators';
 
 const passwordLength = 8;
 const passwordPattern = new RegExp(

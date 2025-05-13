@@ -1,14 +1,20 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { BaseApiService } from '@core/services/base-api.service';
-import { AccessTokenInterface, LoginInterface, RegisterInterface, TokenInterface } from '@core/interfaces';
-import { UserInfoInterface } from '@core/interfaces/auth/user-info.interface';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+import {
+  AccessTokenInterface,
+  LoginInterface,
+  RegisterInterface,
+  TokenInterface,
+  UserInfoInterface,
+} from '@core/interfaces';
+import { AbstractApiService } from '@core/services';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthApiService extends BaseApiService {
+export class AuthApiService extends AbstractApiService {
   public constructor(httpClient: HttpClient) {
     super(httpClient, 'auth');
   }

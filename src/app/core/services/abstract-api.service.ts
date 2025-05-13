@@ -1,8 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { environment } from '@env';
 import { Observable } from 'rxjs';
 
-export abstract class BaseApiService {
+import { environment } from '@env';
+
+export abstract class AbstractApiService {
   private readonly _baseUrl: string = environment.backend;
 
   protected constructor(
