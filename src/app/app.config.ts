@@ -7,12 +7,12 @@ import { providePrimeNG } from 'primeng/config';
 import { ThemePreset } from '@core/theme/preset';
 
 import { routes } from './app.routes';
-import { authInterceptor } from '@core/interceptors';
+import { refreshInterceptor, tokenInterceptor } from '@core/interceptors';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideHttpClient(withInterceptors([authInterceptor])),
+    provideHttpClient(withInterceptors([tokenInterceptor, refreshInterceptor])),
     provideRouter(routes),
     provideAnimationsAsync(),
     providePrimeNG({
