@@ -42,7 +42,6 @@ export class AuthService {
     private readonly _router: Router
   ) {
     this.isLoggedIn$ = new BehaviorSubject<boolean>(this._accessToken != null);
-    this.getUserInfo();
   }
 
   public login(userCredentials: LoginInterface): Observable<TokenInterface> {
@@ -51,9 +50,7 @@ export class AuthService {
       map((tokens: TokenInterface): TokenInterface => {
         this._accessToken = tokens.access;
         this._refreshToken = tokens.refresh;
-
         this.isLoggedIn$.next(true);
-        this.getUserInfo();
 
         return tokens;
       })
