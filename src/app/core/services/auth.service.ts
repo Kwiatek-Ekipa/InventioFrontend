@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, first, map, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 
 import { LocalStorageKeyEnum } from '@core/enums';
-import { LoginInterface, TokenInterface, UserInfoInterface } from '@core/interfaces';
+import { AccessTokenInterface, LoginInterface, TokenInterface, UserInfoInterface } from '@core/interfaces';
 
 import { AuthApiService } from './auth-api.service';
 
@@ -11,7 +11,7 @@ import { AuthApiService } from './auth-api.service';
   providedIn: 'root',
 })
 export class AuthService {
-  public readonly isLoggedIn$: BehaviorSubject<boolean>;
+  private _isLoggedIn$: BehaviorSubject<boolean>;
 
   private _userInfo$ = new BehaviorSubject<UserInfoInterface | null>(null);
 
@@ -37,20 +37,23 @@ export class AuthService {
     return this._userInfo$.asObservable();
   }
 
+  public get isLoggedIn$(): Observable<boolean> {
+    return this._isLoggedIn$.asObservable();
+  }
+
   public constructor(
     private readonly _authApiService: AuthApiService,
     private readonly _router: Router
   ) {
-    this.isLoggedIn$ = new BehaviorSubject<boolean>(this._accessToken != null);
+    this._isLoggedIn$ = new BehaviorSubject<boolean>(this._accessToken != null);
   }
 
   public login(userCredentials: LoginInterface): Observable<TokenInterface> {
     return this._authApiService.login(userCredentials).pipe(
-      first(),
       map((tokens: TokenInterface): TokenInterface => {
         this._accessToken = tokens.access;
         this._refreshToken = tokens.refresh;
-        this.isLoggedIn$.next(true);
+        this._isLoggedIn$.next(true);
 
         return tokens;
       })
@@ -61,27 +64,23 @@ export class AuthService {
     this._userInfo$.next(null);
     this._accessToken = null;
     this._refreshToken = null;
-    this.isLoggedIn$.next(false);
+    this._isLoggedIn$.next(false);
 
     this._router.navigateByUrl('sign-in');
   }
 
   public getUserInfo(): void {
-    this._authApiService
-      .getUserInfo()
-      .pipe(first())
-      .subscribe((userInfo: UserInfoInterface): void => {
-        this._userInfo$.next(userInfo);
-      });
+    this._authApiService.getUserInfo().subscribe((userInfo: UserInfoInterface): void => {
+      this._userInfo$.next(userInfo);
+    });
   }
 
-  public refresh(): Observable<string> {
+  public refresh(): Observable<AccessTokenInterface> {
     return this._authApiService.refresh(this.refreshToken as string).pipe(
-      first(),
-      map(({ access }): string => {
-        this._accessToken = access;
+      map((token: AccessTokenInterface): AccessTokenInterface => {
+        this._accessToken = token.access;
 
-        return access;
+        return token;
       })
     );
   }

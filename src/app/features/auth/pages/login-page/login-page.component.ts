@@ -31,6 +31,6 @@ export class LoginPageComponent {
 
     const userCredentials = this.form.value as LoginInterface;
 
-    this._authService.login(userCredentials).pipe().subscribe();
+    this._authService.login(userCredentials).subscribe();
   }
 }

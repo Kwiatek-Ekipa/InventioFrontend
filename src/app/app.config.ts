@@ -5,9 +5,9 @@ import { provideRouter } from '@angular/router';
 import { providePrimeNG } from 'primeng/config';
 
 import { ThemePreset } from '@core/theme/preset';
+import { refreshInterceptor, tokenInterceptor } from '@core/interceptors';
 
 import { routes } from './app.routes';
-import { refreshInterceptor, tokenInterceptor } from '@core/interceptors';
 
 export const appConfig: ApplicationConfig = {
   providers: [
