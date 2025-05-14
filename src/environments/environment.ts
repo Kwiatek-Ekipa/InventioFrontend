@@ -1,3 +1,3 @@
-export const environments = {
+export const environment = {
   backend: 'http://localhost:8000/api',
 };
