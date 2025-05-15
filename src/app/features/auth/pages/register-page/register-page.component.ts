@@ -7,7 +7,7 @@ import { Button } from 'primeng/button';
 
 import { AuthApiService } from '@core/services';
 import { UILabelComponent } from '@ui';
-import { BackgroundComponent, CardComponent } from '@features/auth/components';
+import { CardComponent } from '@features/auth/components';
 import { passwordMatchValidator } from '@features/auth/validators';
 
 const passwordLength = 8;
@@ -17,7 +17,7 @@ const passwordPattern = new RegExp(
 
 @Component({
   selector: 'auth-register',
-  imports: [BackgroundComponent, UILabelComponent, InputText, Password, ReactiveFormsModule, Button, CardComponent],
+  imports: [UILabelComponent, InputText, Password, ReactiveFormsModule, Button, CardComponent],
   templateUrl: './register-page.component.html',
   styleUrl: './register-page.component.scss',
 })

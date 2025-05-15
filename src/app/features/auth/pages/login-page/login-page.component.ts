@@ -7,12 +7,12 @@ import { Button } from 'primeng/button';
 import { UILabelComponent } from '@ui';
 import { AuthService } from '@core/services';
 import { LoginInterface } from '@core/interfaces';
-import { BackgroundComponent, CardComponent } from '@features/auth/components';
+import { CardComponent } from '@features/auth/components';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'auth-login',
-  imports: [BackgroundComponent, UILabelComponent, InputText, Password, ReactiveFormsModule, Button, CardComponent],
+  imports: [UILabelComponent, InputText, Password, ReactiveFormsModule, Button, CardComponent],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss',
 })
