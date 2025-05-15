@@ -17,12 +17,12 @@ export class RoleGuard implements CanActivate {
   private _authService: AuthService = inject(AuthService);
   private _router = inject(Router);
 
-  public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): MaybeAsync<GuardResult> {
+  public canActivate(_route: ActivatedRouteSnapshot, state: RouterStateSnapshot): MaybeAsync<GuardResult> {
     return this._authService.userInfo$.pipe(
       first(),
       switchMap((user) => {
         if (!user && this._authService.isLoggedIn$.getValue()) {
-          return this._authService.fetchUserInfo().pipe(map((fetchedUser) => fetchedUser));
+          return this._authService.fetchUserInfo();
         }
 
         return of(user);

@@ -25,7 +25,7 @@ export const refreshInterceptor: HttpInterceptorFn = (
       }
 
       if (!isRefreshing) {
-        if (!req.url.includes('/auth/refresh')) {
+        if (!req.url.includes('/auth/refresh') && !req.url.includes('auth/login')) {
           isRefreshing = true;
 
           return authService.refresh().pipe(switchMap(() => next(req)));

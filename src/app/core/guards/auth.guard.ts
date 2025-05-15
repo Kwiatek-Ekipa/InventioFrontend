@@ -17,7 +17,7 @@ export class AuthGuard implements CanActivate {
   private _authService = inject(AuthService);
   private _router = inject(Router);
 
-  public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): MaybeAsync<GuardResult> {
+  public canActivate(_route: ActivatedRouteSnapshot, state: RouterStateSnapshot): MaybeAsync<GuardResult> {
     return this._authService.isLoggedIn$.pipe(
       map((isLoggedIn) => {
         if (isLoggedIn) {
