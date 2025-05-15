@@ -9,6 +9,7 @@ import { AuthService } from '@core/services';
 import { LoginInterface } from '@core/interfaces';
 import { CardComponent } from '@features/auth/components';
 import { ActivatedRoute, Router } from '@angular/router';
+import { finalize, tap } from 'rxjs';
 
 @Component({
   selector: 'auth-login',
@@ -17,6 +18,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './login-page.component.scss',
 })
 export class LoginPageComponent {
+  public isLoading = false;
   public form: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', Validators.required),
@@ -34,10 +36,18 @@ export class LoginPageComponent {
 
     const userCredentials = this.form.value as LoginInterface;
 
-    this._authService.login(userCredentials).subscribe(() => {
-      const redirectUrl = this._route.snapshot.queryParams['returnUrl'] || '/';
+    this.isLoading = true;
+    //TODO: add error handling when toaster is implemented.
+    this._authService
+      .login(userCredentials)
+      .pipe(
+        tap(() => (this.isLoading = true)),
+        finalize(() => (this.isLoading = false))
+      )
+      .subscribe(() => {
+        const redirectUrl = this._route.snapshot.queryParams['returnUrl'] || '/';
 
-      this._router.navigateByUrl(redirectUrl);
-    });
+        this._router.navigateByUrl(redirectUrl);
+      });
   }
 }

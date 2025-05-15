@@ -9,6 +9,7 @@ import { AuthApiService } from '@core/services';
 import { UILabelComponent } from '@ui';
 import { CardComponent } from '@features/auth/components';
 import { passwordMatchValidator } from '@features/auth/validators';
+import { finalize, tap } from 'rxjs';
 
 const passwordLength = 8;
 const passwordPattern = new RegExp(
@@ -22,6 +23,7 @@ const passwordPattern = new RegExp(
   styleUrl: './register-page.component.scss',
 })
 export class RegisterPageComponent {
+  public isLoading = false;
   public form: FormGroup = new FormGroup(
     {
       name: new FormControl('', Validators.required),
@@ -47,8 +49,15 @@ export class RegisterPageComponent {
       return;
     }
 
-    this._authApiService.register(this.form.value).subscribe(() => {
-      this._router.navigate(['/sign-in']);
-    });
+    //TODO: add error handling when toaster is implemented.
+    this._authApiService
+      .register(this.form.value)
+      .pipe(
+        tap(() => (this.isLoading = true)),
+        finalize(() => (this.isLoading = false))
+      )
+      .subscribe(() => {
+        this._router.navigate(['/sign-in']);
+      });
   }
 }

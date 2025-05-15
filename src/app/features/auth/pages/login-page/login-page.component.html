@@ -29,7 +29,7 @@
     <p class="reset-password">
       <a href="/reset-password">Zapomniałeś hasła?</a>
     </p>
-    <p-button fluid type="submit">Zaloguj się</p-button>
+    <p-button fluid type="submit" [loading]="isLoading">Zaloguj się</p-button>
   </form>
   <a rel="stylesheet" href="/sign-up">Zarejestruj się</a>
 </auth-card>
