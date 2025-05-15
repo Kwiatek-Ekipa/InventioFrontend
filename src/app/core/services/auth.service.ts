@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 
 import { LocalStorageKeyEnum } from '@core/enums';
 import { AccessTokenInterface, LoginInterface, TokenInterface, UserInfoInterface } from '@core/interfaces';
@@ -11,9 +11,9 @@ import { AuthApiService } from './auth-api.service';
   providedIn: 'root',
 })
 export class AuthService {
-  private _isLoggedIn$: BehaviorSubject<boolean>;
+  public isLoggedIn$: BehaviorSubject<boolean>;
 
-  private _userInfo$ = new BehaviorSubject<UserInfoInterface | null>(null);
+  public userInfo$ = new BehaviorSubject<UserInfoInterface | null>(null);
 
   private set _accessToken(token: string | null) {
     if (!token) localStorage.removeItem(LocalStorageKeyEnum.ACCESS_TOKEN);
@@ -33,19 +33,11 @@ export class AuthService {
     return localStorage.getItem(LocalStorageKeyEnum.REFRESH_TOKEN);
   }
 
-  public get userInfo$(): Observable<UserInfoInterface | null> {
-    return this._userInfo$.asObservable();
-  }
-
-  public get isLoggedIn$(): Observable<boolean> {
-    return this._isLoggedIn$.asObservable();
-  }
-
   public constructor(
     private readonly _authApiService: AuthApiService,
     private readonly _router: Router
   ) {
-    this._isLoggedIn$ = new BehaviorSubject<boolean>(this._accessToken != null);
+    this.isLoggedIn$ = new BehaviorSubject<boolean>(this.accessToken != null);
   }
 
   public login(userCredentials: LoginInterface): Observable<TokenInterface> {
@@ -53,7 +45,7 @@ export class AuthService {
       map((tokens: TokenInterface): TokenInterface => {
         this._accessToken = tokens.access;
         this._refreshToken = tokens.refresh;
-        this._isLoggedIn$.next(true);
+        this.isLoggedIn$.next(true);
 
         return tokens;
       })
@@ -61,18 +53,20 @@ export class AuthService {
   }
 
   public logout(): void {
-    this._userInfo$.next(null);
     this._accessToken = null;
     this._refreshToken = null;
-    this._isLoggedIn$.next(false);
+    this.isLoggedIn$.next(false);
+    this.userInfo$.next(null);
 
     this._router.navigateByUrl('sign-in');
   }
 
-  public getUserInfo(): void {
-    this._authApiService.getUserInfo().subscribe((userInfo: UserInfoInterface): void => {
-      this._userInfo$.next(userInfo);
-    });
+  public fetchUserInfo(): Observable<UserInfoInterface> {
+    return this._authApiService.getUserInfo().pipe(
+      tap((userInfo: UserInfoInterface): void => {
+        this.userInfo$.next(userInfo);
+      })
+    );
   }
 
   public refresh(): Observable<AccessTokenInterface> {

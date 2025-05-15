@@ -8,6 +8,7 @@ import { UILabelComponent } from '@ui';
 import { AuthService } from '@core/services';
 import { LoginInterface } from '@core/interfaces';
 import { BackgroundComponent, CardComponent } from '@features/auth/components';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'auth-login',
@@ -21,6 +22,8 @@ export class LoginPageComponent {
     password: new FormControl('', Validators.required),
   });
   private _authService: AuthService = inject(AuthService);
+  private _router: Router = inject(Router);
+  private _route = inject(ActivatedRoute);
 
   public handleSubmit(): void {
     if (this.form.invalid) {
@@ -31,6 +34,10 @@ export class LoginPageComponent {
 
     const userCredentials = this.form.value as LoginInterface;
 
-    this._authService.login(userCredentials).subscribe();
+    this._authService.login(userCredentials).subscribe(() => {
+      const redirectUrl = this._route.snapshot.queryParams['returnUrl'] || '/';
+
+      this._router.navigateByUrl(redirectUrl);
+    });
   }
 }

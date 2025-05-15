@@ -119,12 +119,24 @@ export default defineConfig([
       'prefer-const': 'warn',
       'prefer-arrow-callback': 'warn',
       'no-console': 'warn',
-
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          args: 'all',
+          argsIgnorePattern: '^_',
+          caughtErrors: 'all',
+          caughtErrorsIgnorePattern: '^_',
+          destructuredArrayIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          ignoreRestSiblings: true,
+        },
+      ],
       '@typescript-eslint/naming-convention': [
         'warn',
         {
           selector: 'default',
           format: ['camelCase'],
+          leadingUnderscore: 'allow',
         },
         {
           selector: ['memberLike'],
