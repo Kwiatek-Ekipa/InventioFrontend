@@ -2,7 +2,7 @@ import { defineConfig, globalIgnores } from 'eslint/config';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import js from '@eslint/js';
-import stylisticJs from '@stylistic/eslint-plugin-js';
+import stylisticTs from '@stylistic/eslint-plugin-ts';
 import { FlatCompat } from '@eslint/eslintrc';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -19,7 +19,7 @@ export default defineConfig([
     files: ['**/*.ts'],
 
     plugins: {
-      '@stylistic/js': stylisticJs,
+      '@stylistic/ts': stylisticTs,
     },
 
     extends: compat.extends(
@@ -42,8 +42,8 @@ export default defineConfig([
 
     rules: {
       'prettier/prettier': 'warn',
-      '@stylistic/js/indent': ['warn', 2],
-      '@stylistic/js/padding-line-between-statements': [
+      '@stylistic/ts/indent': ['warn', 2],
+      '@stylistic/ts/padding-line-between-statements': [
         'warn',
         {
           blankLine: 'always',
@@ -100,7 +100,7 @@ export default defineConfig([
       '@typescript-eslint/no-extra-non-null-assertion': 'error',
       '@typescript-eslint/no-invalid-void-type': 'error',
       'no-magic-numbers': 'off',
-      '@typescript-eslint/no-magic-numbers': 'warn',
+      '@typescript-eslint/no-magic-numbers': ['warn', { ignore: [-1, 0, 1, 2, 3] }],
       '@typescript-eslint/no-mixed-enums': 'warn',
       '@typescript-eslint/no-this-alias': 'error',
       '@typescript-eslint/no-unnecessary-boolean-literal-compare': 'error',
