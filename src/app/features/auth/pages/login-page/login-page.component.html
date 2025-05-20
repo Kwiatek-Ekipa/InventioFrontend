@@ -1,37 +1,35 @@
-<auth-background>
-  <auth-card label="Zaloguj się">
-    <form [formGroup]="form" (submit)="handleSubmit()" class="form">
-      <span>
-        @let email = form.get('email');
-        @if (email) {
-          <ui-label label="Email" for="email">
-            <input pInputText type="email" formControlName="email" id="email" fluid />
-          </ui-label>
-          @if (email.invalid && email.touched) {
-            @if (email.errors?.['email']) {
-              <small class="error">Email musi być poprawny.</small>
-            } @else {
-              <small class="error">Email nie może być pusty.</small>
-            }
+<auth-card label="Zaloguj się">
+  <form [formGroup]="form" (submit)="handleSubmit()" class="form">
+    <span>
+      @let email = form.get('email');
+      @if (email) {
+        <ui-label label="Email" for="email">
+          <input pInputText type="email" formControlName="email" id="email" fluid />
+        </ui-label>
+        @if (email.invalid && email.touched) {
+          @if (email.errors?.['email']) {
+            <small class="error">Email musi być poprawny.</small>
+          } @else {
+            <small class="error">Email nie może być pusty.</small>
           }
         }
-      </span>
-      <span>
-        @let password = form.get('password');
-        @if (password) {
-          <ui-label label="Hasło" for="password">
-            <p-password id="password" formControlName="password" toggleMask feedback="false" fluid />
-          </ui-label>
-          @if (password.invalid && password.touched) {
-            <small class="error">Hasło nie może być puste.</small>
-          }
+      }
+    </span>
+    <span>
+      @let password = form.get('password');
+      @if (password) {
+        <ui-label label="Hasło" for="password">
+          <p-password id="password" formControlName="password" toggleMask feedback="false" fluid />
+        </ui-label>
+        @if (password.invalid && password.touched) {
+          <small class="error">Hasło nie może być puste.</small>
         }
-      </span>
-      <p class="reset-password">
-        <a href="/reset-password">Zapomniałeś hasła?</a>
-      </p>
-      <p-button fluid type="submit">Zaloguj się</p-button>
-    </form>
-    <a rel="stylesheet" href="/sign-up">Zarejestruj się</a>
-  </auth-card>
-</auth-background>
+      }
+    </span>
+    <p class="reset-password">
+      <a href="/reset-password">Zapomniałeś hasła?</a>
+    </p>
+    <p-button fluid type="submit" [loading]="isLoading">Zaloguj się</p-button>
+  </form>
+  <a rel="stylesheet" href="/sign-up">Zarejestruj się</a>
+</auth-card>

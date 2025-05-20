@@ -20,3 +20,12 @@ button {
 .error {
   color: var(--p-red-500);
 }
+
+.p-menu-item:not(.p-disabled) .p-menu-item-content:has(.p-menu-item-link-active) {
+  color: var(--p-menu-item-focus-color);
+  background: var(--p-menu-item-focus-background);
+
+  .p-menu-item-icon {
+    color: var(--p-menu-item-icon-focus-color);
+  }
+}

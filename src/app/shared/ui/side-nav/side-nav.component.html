@@ -1,0 +1,26 @@
+<div class="container">
+  @let user = userInfo();
+  <p-menu [model]="getMenuItemsWithSeparator()" class="menu">
+    <ng-template #start>
+      <div class="logo-wrapper">
+        <a [routerLink]="`/${user?.role}`">
+          <img src="/assets/logo.svg" alt="Logo of Inventio" class="logo"/>
+        </a>
+      </div>
+    </ng-template>
+  </p-menu>
+  <div class="spacer"></div>
+  <p-menu [model]="userAccountMenuItems" class="menu">
+    <ng-template #end>
+      <div class="footer">
+        <div class="user-info">
+          <p-avatar label="{{ userInitials() }}"/>
+          <span class="user">
+            <span class="name" title="{{ user?.name }} {{ user?.surname }}">{{ user?.name }} {{ user?.surname }}</span>
+            <span class="role p-disabled">{{ user?.role }}</span>
+          </span>
+        </div>
+      </div>
+    </ng-template>
+  </p-menu>
+</div>
