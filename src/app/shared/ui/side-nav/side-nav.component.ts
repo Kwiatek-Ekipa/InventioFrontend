@@ -11,7 +11,7 @@ const userAccountMenuItems: MenuItem[] = [
   {
     label: 'Konto użytkownika',
     items: [
-      { label: 'Ustawienia', icon: 'pi pi-cog', url: 'settings' },
+      { label: 'Ustawienia', icon: 'pi pi-cog', routerLink: 'settings' },
       { label: 'Wyloguj', icon: 'pi pi-sign-out', id: 'logout' },
     ],
   },

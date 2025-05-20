@@ -1,9 +1,17 @@
 import { Routes } from '@angular/router';
-import { DashboardPageComponent } from '@features/worker/pages/dashboard-page/dashboard-page.component';
+import { DashboardPageComponent, DevicesPageComponent, SettingsPageComponent } from '@features/worker/pages';
 
 export default [
   {
     path: '',
     component: DashboardPageComponent,
+  },
+  {
+    path: 'devices',
+    component: DevicesPageComponent,
+  },
+  {
+    path: 'settings',
+    component: SettingsPageComponent,
   },
 ] as Routes;

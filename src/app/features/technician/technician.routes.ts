@@ -1,6 +1,11 @@
 import { Routes } from '@angular/router';
-import { DevicesPageComponent } from '@features/technician/pages/devices-page/devices-page.component';
-import { DashboardPageComponent } from '@features/technician/pages/dashboard-page/dashboard-page.component';
+import {
+  DashboardPageComponent,
+  DevicesPageComponent,
+  SettingsPageComponent,
+  StocktakingPageComponent,
+  UsersPageComponent,
+} from './pages';
 
 export default [
   {
@@ -10,5 +15,17 @@ export default [
   {
     path: 'devices',
     component: DevicesPageComponent,
+  },
+  {
+    path: 'users',
+    component: UsersPageComponent,
+  },
+  {
+    path: 'stocktaking',
+    component: StocktakingPageComponent,
+  },
+  {
+    path: 'settings',
+    component: SettingsPageComponent,
   },
 ] as Routes;
