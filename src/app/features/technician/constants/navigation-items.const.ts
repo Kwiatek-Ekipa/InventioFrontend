@@ -3,7 +3,7 @@ import { MenuItem } from 'primeng/api';
 export const technicianNavigationItems: MenuItem[] = [
   {
     label: 'Pulpit',
-    items: [{ label: 'Dashboard', icon: 'pi pi-objects-column', routerLink: '' }],
+    items: [{ label: 'Panel Główny', icon: 'pi pi-objects-column', routerLink: '' }],
   },
   {
     label: 'Zasoby',
