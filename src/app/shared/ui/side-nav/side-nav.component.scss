@@ -1,0 +1,66 @@
+.container {
+  height: 100vh;
+  min-width: 250px;
+  width: 10vw;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--p-menu-background);
+
+  .spacer {
+    flex-grow: 1;
+  }
+
+  .menu {
+    .logo-wrapper {
+      padding: 0.5rem 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+
+      .logo {
+        height: 2rem;
+      }
+    }
+
+    .p-menu-item-link-active {
+      color: var(--p-menu-item-focus-color);
+      background: var(--p-menu-item-focus-background);
+    }
+
+    .user-info {
+      display: flex;
+      gap: 0.5rem;
+      padding: 0.5rem;
+
+      .user {
+        width: calc(100% - 3rem);
+        display: inline-flex;
+        flex-direction: column;
+
+        .name {
+          width: 100%;
+          overflow: hidden;
+          white-space: nowrap;
+
+          font-weight: bold;
+          text-overflow: ellipsis;
+        }
+
+        .role {
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
+
+}
+
+:host ::ng-deep .p-menu {
+  border: none;
+  border-radius: 0;
+  height: 100%;
+}
+
+:host ::ng-deep .p-avatar {
+  aspect-ratio: 1;
+}

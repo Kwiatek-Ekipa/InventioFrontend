@@ -3,7 +3,7 @@ import { LoginPageComponent, RegisterPageComponent } from '@features/auth/pages'
 import { inject } from '@angular/core';
 import { AuthService } from '@core/services';
 import { AuthGuard, LoginGuard, RoleGuard } from '@core/guards';
-import { UserLayoutComponent } from '@shared/layouts/user-layout/user-layout.component';
+import { UserLayoutComponent } from '@ui/user-layout/user-layout.component';
 
 export const routes: Routes = [
   {

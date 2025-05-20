@@ -1,0 +1,6 @@
+<div class="container">
+  <ui-side-nav [navigationItems]="navigationItems" [userInfo]="userInfo$ | async" (logout)="handleLogout()"/>
+  <div class="page">
+    <router-outlet/>
+  </div>
+</div>

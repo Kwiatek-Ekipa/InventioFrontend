@@ -1,0 +1,47 @@
+<div class="container">
+  @let user = userInfo();
+  <p-menu [model]="getMenuItemsWithSeparator()" class="menu">
+    <ng-template #start>
+      <div class="logo-wrapper">
+        <img src="/assets/logo.svg" alt="Logo of Inventio" class="logo"/>
+      </div>
+    </ng-template>
+    <ng-template #item let-item>
+      <div class="p-menu-item-content">
+        <a
+            [routerLink]="`/${user?.role}/${item.routerLink}`"
+            routerLinkActive="p-menu-item-link-active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            pRipple
+            class="p-menu-item-link"
+        >
+          <span [class]="`p-menu-item-icon ${item.icon}`"></span>
+          <span [class]="`p-menu-item-label`">{{ item.label }}</span>
+        </a>
+      </div>
+    </ng-template>
+  </p-menu>
+  <div class="spacer"></div>
+  <p-menu [model]="userAccountMenuItems" class="menu">
+    <ng-template #item let-item>
+      <div class="p-menu-item-content" (click)="onMenuItemClick(item)">
+        <a [routerLink]="item.routerLink" pRipple class="p-menu-item-link">
+          <span [class]="`p-menu-item-icon ${item.icon}`"></span>
+          <span [class]="`p-menu-item-label`">{{ item.label }}</span>
+        </a>
+      </div>
+    </ng-template>
+    <ng-template #end>
+      <div class="footer">
+        <div class="user-info">
+          <p-avatar label="{{ userInitials() }}"/>
+          <span class="user">
+            <span class="name" title="{{ user?.name }} {{ user?.surname }}">{{ user?.name }} {{ user?.surname }}
+              ajsdnasndklasndklasld</span>
+            <span class="role p-disabled">{{ user?.role }}</span>
+          </span>
+        </div>
+      </div>
+    </ng-template>
+  </p-menu>
+</div>
