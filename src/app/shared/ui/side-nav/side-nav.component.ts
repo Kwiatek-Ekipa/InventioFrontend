@@ -19,7 +19,7 @@ const userAccountMenuItems: MenuItem[] = [
 ];
 
 @Component({
-  selector: 'ui-side-nav [navigationItems]',
+  selector: 'ui-side-nav [navigationItems] [userInfo]',
   imports: [Menu, Avatar, RouterLink, Ripple, RouterLinkActive],
   templateUrl: './side-nav.component.html',
   styleUrl: './side-nav.component.scss',
