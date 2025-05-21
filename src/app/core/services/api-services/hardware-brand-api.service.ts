@@ -8,7 +8,7 @@ import { HardwareBrandInterface } from '@core/models';
 })
 export class HardwareBrandApiService extends AbstractApiService {
   public constructor() {
-    super('brand');
+    super('brands');
   }
 
   public searchBrands(name: string): Observable<HardwareBrandInterface[]> {
