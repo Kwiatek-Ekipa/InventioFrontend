@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import {
@@ -15,8 +14,8 @@ import { AbstractApiService } from '@core/services';
   providedIn: 'root',
 })
 export class AuthApiService extends AbstractApiService {
-  public constructor(httpClient: HttpClient) {
-    super(httpClient, 'auth');
+  public constructor() {
+    super('auth');
   }
 
   public login(userCredentials: LoginInterface): Observable<TokenInterface> {
