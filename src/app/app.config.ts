@@ -8,11 +8,12 @@ import { ThemePreset } from '@core/theme/preset';
 import { refreshInterceptor, tokenInterceptor } from '@core/interceptors';
 
 import { routes } from './app.routes';
+import { dateInterceptor } from '@core/interceptors/date.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideHttpClient(withInterceptors([tokenInterceptor, refreshInterceptor])),
+    provideHttpClient(withInterceptors([tokenInterceptor, refreshInterceptor, dateInterceptor])),
     provideRouter(routes),
     provideAnimationsAsync(),
     providePrimeNG({
