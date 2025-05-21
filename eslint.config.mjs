@@ -41,7 +41,7 @@ export default defineConfig([
     settings: {},
 
     rules: {
-      'prettier/prettier': 'warn',
+      'prettier/prettier': ['warn', {'endOfLine': 'auto'}],
       '@stylistic/ts/indent': ['warn', 2],
       '@stylistic/ts/padding-line-between-statements': [
         'warn',
