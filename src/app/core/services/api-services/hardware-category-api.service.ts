@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AbstractApiService } from '@core/services';
+import { AbstractApiService } from './abstract-api.service';
 import { Observable } from 'rxjs';
 import { HardwareCategoryInterface } from '@core/models';
 

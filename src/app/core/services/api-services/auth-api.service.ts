@@ -8,7 +8,7 @@ import {
   TokenInterface,
   UserInfoInterface,
 } from '@core/interfaces';
-import { AbstractApiService } from '@core/services';
+import { AbstractApiService } from './abstract-api.service';
 
 @Injectable({
   providedIn: 'root',

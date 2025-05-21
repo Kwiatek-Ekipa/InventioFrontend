@@ -1,8 +1,8 @@
+import { inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from '@env';
-import { inject } from '@angular/core';
 
 export abstract class AbstractApiService {
   private readonly _baseUrl: string = environment.backend;
