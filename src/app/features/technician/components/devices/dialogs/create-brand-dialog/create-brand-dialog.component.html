@@ -17,7 +17,7 @@
       <ui-label label="Nazwa marki">
         <input pInputText fluid type="text" [formControl]="brandNameControl"/>
       </ui-label>
-      @if (brandNameControl.invalid && brandNameControl.dirty) {
+      @if (brandNameControl.invalid && (brandNameControl.dirty || brandNameControl.touched)) {
         <small class="error">Pole jest wymagane.</small>
       }
     </form>
