@@ -42,6 +42,7 @@ export default defineConfig([
 
     rules: {
       'prettier/prettier': ['warn', {'endOfLine': 'auto'}],
+      '@angular-eslint/no-output-on-prefix': 'off',
       '@stylistic/ts/indent': ['warn', 2],
       '@stylistic/ts/padding-line-between-statements': [
         'warn',
