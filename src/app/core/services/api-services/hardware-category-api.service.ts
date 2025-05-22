@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AbstractApiService } from './abstract-api.service';
 import { Observable } from 'rxjs';
-import { HardwareCategoryInterface } from '@core/models';
+import { CreateHardwareCategoryInterface, HardwareCategoryInterface } from '@core/models';
+import { AbstractApiService } from './abstract-api.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +11,7 @@ export class HardwareCategoryApiService extends AbstractApiService {
     super('categories');
   }
 
-  public searchCategories(name: string): Observable<HardwareCategoryInterface> {
+  public searchCategories(name: string): Observable<HardwareCategoryInterface[]> {
     return this.$get('', { name });
   }
 
@@ -19,7 +19,7 @@ export class HardwareCategoryApiService extends AbstractApiService {
     return this.$get(`${id}`);
   }
 
-  public createCategory(category: HardwareCategoryInterface): Observable<HardwareCategoryInterface> {
+  public createCategory(category: CreateHardwareCategoryInterface): Observable<HardwareCategoryInterface> {
     return this.$post('', category);
   }
 

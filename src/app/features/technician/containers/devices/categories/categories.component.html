@@ -1,0 +1,90 @@
+<p-card>
+  <div class="container">
+    <p-table [value]="categories" [loading]="isLoading" [scrollable]="true" scrollHeight="280px">
+      <ng-template #caption>
+        <div class="caption">
+          <h2>Kategorie</h2>
+          <p-iconfield>
+            <p-inputicon styleClass="pi pi-search"/>
+            <input pInputText type="text" [formControl]="searchControl" placeholder="Wyszukaj..."/>
+            <p-inputicon styleClass="pi pi-times" (click)="searchControl.reset()"/>
+          </p-iconfield>
+        </div>
+      </ng-template>
+      <ng-template #header>
+        <tr>
+          <th pSortableColumn="name">Nazwa
+            <p-sortIcon field="name"/>
+          </th>
+          <th style="width: 120px"></th>
+        </tr>
+      </ng-template>
+      <ng-template #body let-brand>
+        <tr>
+          <td>
+            {{ brand.name }}
+          </td>
+          <td>
+            <p-button-group>
+              <p-button
+                type="button"
+                icon="pi pi-pencil"
+                text
+                rounded
+                severity="primary"
+                (onClick)="handleUpdateCategory(brand)"
+              />
+              <p-button
+                type="button"
+                icon="pi pi-trash"
+                text
+                rounded
+                severity="danger"
+                (onClick)="handleDeleteCategory(brand)"
+              />
+            </p-button-group>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template #loadingbody>
+        <tr>
+          <td colspan="2">
+            <p-progress-spinner/>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template #emptymessage>
+        <tr>
+          <td colspan="2">Brak dodanych kategorii sprzętu.</td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <div class="action-buttons">
+      <p-button icon="pi pi-plus"
+        iconPos="left"
+        label="Dodaj kategorię sprzętu"
+        (onClick)="showCreateCategoryDialog = true"/>
+    </div>
+  </div>
+</p-card>
+
+@if (showCreateCategoryDialog) {
+  <technician-create-category-dialog
+    [(isVisible)]="showCreateCategoryDialog"
+    (onConfirm)="handleCreateCategoryConfirm($event)"
+  />
+}
+@if (showUpdateCategoryDialog) {
+  <technician-update-category-dialog
+    [(isVisible)]="showUpdateCategoryDialog"
+    [category]="selectedCategory!"
+    (onConfirm)="handleUpdateCategoryConfirm(selectedCategory!)"
+  />
+}
+@if (showDeleteCategoryDialog) {
+  <technician-delete-category-dialog
+    [(isVisible)]="showDeleteCategoryDialog"
+    [category]="selectedCategory!"
+    (onConfirm)="handleDeleteCategoryConfirm(selectedCategory!)"
+  />
+}

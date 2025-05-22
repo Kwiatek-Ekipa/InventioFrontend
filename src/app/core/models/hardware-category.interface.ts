@@ -1,4 +1,8 @@
 export interface HardwareCategoryInterface {
-  id?: string;
+  id: string;
+  name: string;
+}
+
+export interface CreateHardwareCategoryInterface {
   name: string;
 }
