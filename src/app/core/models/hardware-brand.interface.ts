@@ -1,4 +1,8 @@
 export interface HardwareBrandInterface {
-  id?: string;
+  id: string;
+  name: string;
+}
+
+export interface CreateHardwareBrandInterface {
   name: string;
 }

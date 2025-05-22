@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AbstractApiService } from './abstract-api.service';
 import { Observable } from 'rxjs';
-import { HardwareBrandInterface } from '@core/models';
+import { CreateHardwareBrandInterface, HardwareBrandInterface } from '@core/models';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +19,7 @@ export class HardwareBrandApiService extends AbstractApiService {
     return this.$get(`${id}`);
   }
 
-  public createBrand(brand: HardwareBrandInterface): Observable<HardwareBrandInterface> {
+  public createBrand(brand: CreateHardwareBrandInterface): Observable<HardwareBrandInterface> {
     return this.$post('', brand);
   }
 

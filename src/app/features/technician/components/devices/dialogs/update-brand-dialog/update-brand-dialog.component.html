@@ -1,0 +1,32 @@
+<p-dialog
+    [visible]="isVisible"
+    (visibleChange)="isVisibleChange.emit($event)"
+    [modal]="true"
+    [draggable]="false"
+    [style]="{ width: '500px' }"
+>
+  <ng-template #header>
+    <h3>
+      <i class="pi pi-pencil"></i>
+      Edytuj markę
+    </h3>
+  </ng-template>
+  <div class="dialog-body">
+    <p>Edytuj markę sprzętu
+      <b>{{ brand?.name }}</b>
+      .
+    </p>
+    <form>
+      <ui-label label="Nazwa marki">
+        <input pInputText fluid type="text" [formControl]="brandNameControl"/>
+      </ui-label>
+      @if (brandNameControl.invalid && brandNameControl.dirty) {
+        <small class="error">Pole jest wymagane.</small>
+      }
+    </form>
+  </div>
+  <ng-template #footer>
+    <p-button (click)="handleCreateBrandConfirm()" label="Zapisz"/>
+    <p-button (click)="handleCreateBrandCancel()" label="Anuluj" severity="secondary"/>
+  </ng-template>
+</p-dialog>
