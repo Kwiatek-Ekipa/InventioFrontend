@@ -72,7 +72,7 @@
   <technician-update-brand-dialog
       [(isVisible)]="showUpdateBrandDialog"
       [brand]="selectedBrand!"
-      (onConfirm)="handleUpdateBrandConfirm(selectedBrand!)"
+      (onConfirm)="handleUpdateBrandConfirm($event)"
   />
 }
 @if (showDeleteBrandDialog) {
