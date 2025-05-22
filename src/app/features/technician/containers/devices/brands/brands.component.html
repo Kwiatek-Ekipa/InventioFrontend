@@ -1,6 +1,6 @@
 <p-card>
   <div class="container">
-    <p-table #table [value]="brands" [loading]="isLoading" [scrollable]="true" scrollHeight="280px">
+    <p-table [value]="brands" [loading]="isLoading" [scrollable]="true" scrollHeight="280px">
       <ng-template #caption>
         <div class="caption">
           <h2>Marki</h2>
@@ -12,7 +12,9 @@
       </ng-template>
       <ng-template #header>
         <tr>
-          <th>Nazwa</th>
+          <th pSortableColumn="name">Nazwa
+            <p-sortIcon field="name"/>
+          </th>
           <th style="width: 120px"></th>
         </tr>
       </ng-template>

@@ -1,9 +1,10 @@
-<p-dialog #dialog
-    [visible]="isVisible"
-    (visibleChange)="isVisibleChange.emit($event)"
-    [modal]="true"
-    [draggable]="false"
-    [style]="{ width: '500px' }">
+<p-dialog
+  [visible]="isVisible"
+  (visibleChange)="isVisibleChange.emit($event)"
+  [modal]="true"
+  [draggable]="false"
+  [style]="{ width: '500px' }"
+>
   <ng-template #header>
     <h3>
       <i class="pi pi-trash"></i>
@@ -12,10 +13,7 @@
   </ng-template>
   <p>
     Czy na pewno chcesz usunąć producenta sprzętu
-    <b>{{ brand?.name }}
-    </b
-    >
-    ? Spowoduje to usunięcie wszystkich urządzeń tego producenta z systemu.
+    <b>{{ brand.name }}</b>? Spowoduje to usunięcie wszystkich urządzeń tego producenta z systemu.
     <b>Ta operacja jest nieodwracalna!</b>
   </p>
   <ng-template #footer>
