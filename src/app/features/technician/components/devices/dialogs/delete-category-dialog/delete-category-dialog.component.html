@@ -11,11 +11,13 @@
       Usuń kategorię
     </h3>
   </ng-template>
-  <p>
-    Czy na pewno chcesz usunąć kategorię sprzętu <b>{{ category.name }}</b
-  >? Spowoduje to usunięcie wszystkich urządzeń należących do tej kategorii z systemu.
-    <b>Ta operacja jest nieodwracalna!</b>
-  </p>
+  <div class="dialog-body">
+    <ui-irreversible-operation-tag/>
+    <p>
+      Czy na pewno chcesz usunąć kategorię sprzętu <b>{{ category.name }}</b>?
+      Spowoduje to usunięcie wszystkich urządzeń należących do tej kategorii z systemu.
+    </p>
+  </div>
   <ng-template #footer>
     <p-button (click)="handleDeleteBrandConfirm()" label="Usuń" severity="danger"/>
     <p-button (click)="handleDeleteBrandCancel()" label="Anuluj" severity="secondary"/>

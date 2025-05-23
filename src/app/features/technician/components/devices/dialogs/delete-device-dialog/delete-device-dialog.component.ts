@@ -1,18 +1,21 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Button } from 'primeng/button';
 import { Dialog } from 'primeng/dialog';
-import { HardwareBrandInterface } from '@core/models';
+import { DeviceInterface } from '@core/models/device.interface';
+import {
+  DeviceDetailsComponent,
+} from '@features/technician/components/devices/device-details/device-details.component';
 import { IrreversibleOperationTagComponent } from '@ui';
 
 @Component({
-  selector: 'technician-delete-brand-dialog [isVisible] [brand]',
-  imports: [Button, Dialog, IrreversibleOperationTagComponent],
-  templateUrl: './delete-brand-dialog.component.html',
-  styleUrl: './delete-brand-dialog.component.scss',
+  selector: 'technician-delete-device-dialog [isVisible] [device]',
+  imports: [Button, Dialog, DeviceDetailsComponent, IrreversibleOperationTagComponent],
+  templateUrl: './delete-device-dialog.component.html',
+  styleUrl: './delete-device-dialog.component.scss',
 })
-export class DeleteBrandDialogComponent {
+export class DeleteDeviceDialogComponent {
   @Input() public isVisible = false;
-  @Input() public brand!: HardwareBrandInterface;
+  @Input() public device!: DeviceInterface;
 
   @Output() public isVisibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() public onConfirm = new EventEmitter<void>();

@@ -1,0 +1,115 @@
+<p-dialog
+  [visible]="isVisible"
+  (visibleChange)="isVisibleChange.emit($event)"
+  [modal]="true"
+  [draggable]="false"
+  [style]="{ width: '800px', height: '600px' }"
+>
+  <ng-template #header>
+    <h3>
+      <i class="pi pi-plus"></i>
+      Dodaj urządzenie
+    </h3>
+  </ng-template>
+  <div class="dialog-body">
+    <form [formGroup]="deviceFormGroup" class="create-form">
+      <span>
+        <ui-label label="Model">
+          <input pInputText fluid type="text" formControlName="model"/>
+        </ui-label>
+        @if (deviceFormGroup.get('model')?.invalid &&
+        (deviceFormGroup.get('model')?.dirty || deviceFormGroup.get('model')?.touched)) {
+          <small class="error">Pole jest wymagane.</small>
+        }
+      </span>
+      <span>
+        <ui-label label="Numer seryjny">
+          <input pInputText fluid type="text" formControlName="serialNumber"/>
+        </ui-label>
+        @if (deviceFormGroup.get('serialNumber')?.invalid &&
+        (deviceFormGroup.get('serialNumber')?.dirty || deviceFormGroup.get('serialNumber')?.touched)) {
+          <small class="error">Pole jest wymagane.</small>
+        }
+      </span>
+      <span>
+        <ui-label label="Rok produkcji">
+          <p-input-number
+            useGrouping="false"
+            fluid
+            type="text"
+            formControlName="yearOfProduction"
+            min="1950"
+            [max]="currentDate"
+          />
+        </ui-label>
+        @if (deviceFormGroup.get('yearOfProduction')?.invalid &&
+        (deviceFormGroup.get('yearOfProduction')?.dirty || deviceFormGroup.get('yearOfProduction')?.touched)) {
+          @if (deviceFormGroup.hasError('min', 'yearOfProduction')) {
+            <small class="error">Rok produkcji musi być większy niż 1950r.</small>
+          } @else if (deviceFormGroup.hasError('max', 'yearOfProduction')) {
+            <small class="error">Rok produkcji nie może być większy niż aktualny rok.</small>
+          } @else {
+            <small class="error">Pole jest wymagane.</small>
+          }
+        }
+      </span>
+      <div class="form-select-section">
+        <div class="form-select">
+          <ui-label label="Marka">
+            <p-select
+              [options]="brands"
+              optionLabel="name"
+              optionValue="id"
+              fluid
+              type="text"
+              formControlName="brandId"
+              filter="true"
+              appendTo="body"
+            />
+          </ui-label>
+          @if (deviceFormGroup.get('brandId')?.invalid &&
+          (deviceFormGroup.get('brandId')?.dirty || deviceFormGroup.get('brandId')?.touched)) {
+            <small class="error">Pole jest wymagane.</small>
+          }
+        </div>
+        <div class="form-select">
+          <ui-label label="Kategoria">
+            <p-select
+              [options]="categories"
+              optionLabel="name"
+              optionValue="id"
+              type="text"
+              formControlName="categoryId"
+              filter="true"
+              fluid
+              appendTo="body"
+            />
+          </ui-label>
+          @if (deviceFormGroup.get('categoryId')?.invalid &&
+          (deviceFormGroup.get('categoryId')?.dirty || deviceFormGroup.get('categoryId')?.touched)) {
+            <small class="error">Pole jest wymagane.</small>
+          }
+        </div>
+      </div>
+      <span>
+        <p-checkbox #checkbox inputId="hasAddedDate" formControlName="hasAddedDate" [binary]="true"/>
+        <label for="hasAddedDate">&nbsp;Zmień datę dodania</label>
+      </span>
+      @if (checkbox.checked) {
+        <span>
+          <ui-label label="Data dodania">
+            <p-date-picker fluid formControlName="addedDate" [maxDate]="currentDate" appendTo="body"/>
+          </ui-label>
+          @if (deviceFormGroup.get('addedDate')?.invalid &&
+          (deviceFormGroup.get('addedDate')?.dirty || deviceFormGroup.get('addedDate')?.touched)) {
+            <small class="error">Pole jest wymagane.</small>
+          }
+        </span>
+      }
+    </form>
+  </div>
+  <ng-template #footer>
+    <p-button (click)="handleCreateCategoryConfirm()" label="Dodaj"/>
+    <p-button (click)="handleCreateCategoryCancel()" label="Anuluj" severity="secondary"/>
+  </ng-template>
+</p-dialog>

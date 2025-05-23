@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { Card } from 'primeng/card';
 import { BrandsComponent } from '@features/technician/containers/devices/brands/brands.component';
 import { CategoriesComponent } from '@features/technician/containers/devices/categories/categories.component';
+import { DevicesComponent } from '@features/technician/containers/devices/devices/devices.component';
 
 @Component({
   selector: 'technician-devices-page',
-  imports: [Card, BrandsComponent, CategoriesComponent],
+  imports: [BrandsComponent, CategoriesComponent, DevicesComponent],
   templateUrl: './devices-page.component.html',
   styleUrl: './devices-page.component.scss',
 })

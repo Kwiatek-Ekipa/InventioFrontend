@@ -7,11 +7,11 @@ export type SearchDeviceOrderingType =
   | '-added_date';
 
 export type SearchDeviceType = {
-  brand_id?: string[];
-  category_id?: string[];
+  brandId?: string[];
+  categoryId?: string[];
   model?: string;
-  serial_number?: string;
-  year_of_production__gte?: number;
-  year_of_production__lte?: number;
+  serialNumber?: string;
+  yearOfProductionGte?: number;
+  yearOfProductionLte?: number;
   ordering?: SearchDeviceOrderingType;
 };
