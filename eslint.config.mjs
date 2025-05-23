@@ -165,6 +165,11 @@ export default defineConfig([
           types: ['boolean'],
           prefix: ['is', 'are', 'has', 'can', 'show', 'should', 'needs', 'must'],
         },
+        {
+          selector: ['variable'],
+          modifiers: ['global'],
+          format: ['UPPER_CASE', 'camelCase', 'PascalCase'],
+        },
       ],
 
       '@typescript-eslint/member-ordering': [
