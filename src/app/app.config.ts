@@ -25,7 +25,7 @@ export const appConfig: ApplicationConfig = {
         },
       },
       translation: {
-        dayNamesMin: ['Ndz', 'Pon', 'Wt', 'Śr', 'Czw', 'Pt', 'Sob'],
+        dayNamesMin: ['Niedz', 'Pon', 'Wt', 'Śr', 'Czw', 'Pt', 'Sob'],
         monthNames: [
           'Styczeń',
           'Luty',
