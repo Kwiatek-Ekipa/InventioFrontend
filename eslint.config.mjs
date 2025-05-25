@@ -146,6 +146,11 @@ export default defineConfig([
           format: ['camelCase'],
         },
         {
+          selector: ['field'],
+          modifiers: ['readonly'],
+          format: ['camelCase', 'UPPER_CASE'],
+        },
+        {
           selector: ['memberLike'],
           modifiers: ['protected'],
           format: ['camelCase'],

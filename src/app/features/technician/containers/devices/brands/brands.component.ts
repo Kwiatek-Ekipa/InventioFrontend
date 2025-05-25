@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Card } from 'primeng/card';
 import { CreateHardwareBrandInterface, HardwareBrandInterface } from '@core/models';
 import { TableModule } from 'primeng/table';
@@ -42,6 +42,7 @@ import {
   styleUrl: './brands.component.scss',
 })
 export class BrandsComponent {
+  @Output() public onBrandsChange = new EventEmitter<void>();
   public selectedBrand: HardwareBrandInterface | undefined;
   public brands: HardwareBrandInterface[] = [];
   public isLoading: boolean = true;
@@ -51,23 +52,14 @@ export class BrandsComponent {
   public showCreateBrandDialog = false;
   public showUpdateBrandDialog = false;
 
-  public constructor(private _brandsApiService: HardwareBrandApiService) {
-    this.searchControl.valueChanges
-      .pipe(debounceTime(300), distinctUntilChanged())
-      .subscribe((): void => this.fetchBrands());
-    this.fetchBrands();
-  }
+  private readonly _DEBOUNCE_TIME_MS = 300;
 
-  public fetchBrands(): void {
-    this._brandsApiService
-      .searchBrands(this.searchControl.value ?? '')
-      .pipe(
-        tap(() => (this.isLoading = true)),
-        finalize(() => (this.isLoading = false)),
-      )
-      .subscribe((brands) => {
-        this.brands = brands;
-      });
+  public constructor(private _brandsApiService: HardwareBrandApiService) {
+
+    this.searchControl.valueChanges
+      .pipe(debounceTime(this._DEBOUNCE_TIME_MS), distinctUntilChanged())
+      .subscribe((): void => this._fetchBrands());
+    this._fetchBrands();
   }
 
   public handleUpdateBrand(brand: HardwareBrandInterface): void {
@@ -84,16 +76,37 @@ export class BrandsComponent {
     const newBrand: CreateHardwareBrandInterface = { name: brandName };
 
     this.showCreateBrandDialog = false;
-    this._brandsApiService.createBrand(newBrand).subscribe(() => this.fetchBrands());
+    this._brandsApiService.createBrand(newBrand).subscribe(() => {
+      this.onBrandsChange.emit();
+      this._fetchBrands();
+    });
   }
 
   public handleUpdateBrandConfirm(updatedBrand: HardwareBrandInterface): void {
     this.showUpdateBrandDialog = false;
-    this._brandsApiService.updateBrand(updatedBrand).subscribe(() => this.fetchBrands());
+    this._brandsApiService.updateBrand(updatedBrand).subscribe(() => {
+      this.onBrandsChange.emit();
+      this._fetchBrands();
+    });
   }
 
   public handleDeleteBrandConfirm(brand: HardwareBrandInterface): void {
     this.showDeleteBrandDialog = false;
-    this._brandsApiService.deleteBrand(brand.id).subscribe(() => this.fetchBrands());
+    this._brandsApiService.deleteBrand(brand.id).subscribe(() => {
+      this.onBrandsChange.emit();
+      this._fetchBrands();
+    });
+  }
+
+  private _fetchBrands(): void {
+    this._brandsApiService
+      .searchBrands(this.searchControl.value ?? '')
+      .pipe(
+        tap(() => (this.isLoading = true)),
+        finalize(() => (this.isLoading = false)),
+      )
+      .subscribe((brands) => {
+        this.brands = brands;
+      });
   }
 }

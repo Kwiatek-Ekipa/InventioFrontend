@@ -1,5 +1,5 @@
 <div class="container">
-  <technician-devices class="devices"/>
-  <technician-brands class="brands"/>
-  <technician-categories class="categories"/>
+  <technician-devices #devices class="devices"/>
+  <technician-brands (onBrandsChange)="refreshDevices()" class="brands"/>
+  <technician-categories (onCategoriesChange)="refreshDevices()" class="categories"/>
 </div>

@@ -16,10 +16,18 @@ import { UILabelComponent } from '@ui';
 import { InputNumber } from 'primeng/inputnumber';
 import { MultiSelect } from 'primeng/multiselect';
 import { SearchDeviceType } from '@core/types';
-import { CreateDeviceDialogComponent } from '@features/technician/components/devices/dialogs/create-device-dialog/create-device-dialog.component';
-import { DeleteDeviceDialogComponent } from '@features/technician/components/devices/dialogs/delete-device-dialog/delete-device-dialog.component';
-import { DeviceDetailsDialogComponent } from '@features/technician/components/devices/dialogs/device-details-dialog/device-details-dialog.component';
-import { UpdateDeviceDialogComponent } from '@features/technician/components/devices/dialogs/update-device-dialog/update-device-dialog.component';
+import {
+  CreateDeviceDialogComponent,
+} from '@features/technician/components/devices/dialogs/create-device-dialog/create-device-dialog.component';
+import {
+  DeleteDeviceDialogComponent,
+} from '@features/technician/components/devices/dialogs/delete-device-dialog/delete-device-dialog.component';
+import {
+  DeviceDetailsDialogComponent,
+} from '@features/technician/components/devices/dialogs/device-details-dialog/device-details-dialog.component';
+import {
+  UpdateDeviceDialogComponent,
+} from '@features/technician/components/devices/dialogs/update-device-dialog/update-device-dialog.component';
 
 @Component({
   selector: 'technician-devices',
@@ -65,55 +73,23 @@ export class DevicesComponent {
     yearOfProductionLte: new FormControl<number | undefined>(undefined),
   });
 
+  private readonly _DEBOUNCE_TIME_MS = 300;
+
   public constructor(
     private _deviceApiService: DeviceApiService,
     private _categoryApiService: HardwareCategoryApiService,
     private _brandApiService: HardwareBrandApiService,
   ) {
     this.searchParametersFormGroup.valueChanges
-      .pipe(debounceTime(300), distinctUntilChanged())
-      .subscribe((): void => this.fetchDevices());
-    this.fetchDevices();
-    this.fetchBrands();
-    this.fetchCategories();
+      .pipe(debounceTime(this._DEBOUNCE_TIME_MS), distinctUntilChanged())
+      .subscribe((): void => this._fetchDevices());
+    this.fetchData();
   }
 
-  public fetchDevices(): void {
-    const searchParameters: SearchDeviceType = this.searchParametersFormGroup.value as SearchDeviceType;
-
-    this._deviceApiService
-      .searchDevices(searchParameters)
-      .pipe(
-        tap(() => (this.isLoading = true)),
-        finalize(() => (this.isLoading = false)),
-      )
-      .subscribe((devices: DeviceInterface[]): void => {
-        this.devices = devices;
-      });
-  }
-
-  public fetchBrands(): void {
-    this._brandApiService
-      .searchBrands('')
-      .pipe(
-        tap(() => (this.isLoading = true)),
-        finalize(() => (this.isLoading = false)),
-      )
-      .subscribe((brands: HardwareBrandInterface[]): void => {
-        this.brands = brands;
-      });
-  }
-
-  public fetchCategories(): void {
-    this._categoryApiService
-      .searchCategories('')
-      .pipe(
-        tap(() => (this.isLoading = true)),
-        finalize(() => (this.isLoading = false)),
-      )
-      .subscribe((categories: HardwareCategoryInterface[]): void => {
-        this.categories = categories;
-      });
+  public fetchData(): void {
+    this._fetchDevices();
+    this._fetchBrands();
+    this._fetchCategories();
   }
 
   public handleUpdateDevice(device: DeviceInterface): void {
@@ -133,16 +109,57 @@ export class DevicesComponent {
 
   public handleCreateDeviceConfirm(newDevice: CreateDeviceInterface): void {
     this.showCreateDeviceDialog = false;
-    this._deviceApiService.createDevice(newDevice).subscribe(() => this.fetchDevices());
+    this._deviceApiService.createDevice(newDevice).subscribe(() => this._fetchDevices());
   }
 
   public handleUpdateDeviceConfirm(updatedDevice: UpdateDeviceInterface): void {
     this.showUpdateDeviceDialog = false;
-    this._deviceApiService.updateDevice(updatedDevice).subscribe(() => this.fetchDevices());
+    this._deviceApiService.updateDevice(updatedDevice).subscribe(() => this._fetchDevices());
   }
 
   public handleDeleteDeviceConfirm(device: DeviceInterface): void {
     this.showDeleteDeviceDialog = false;
-    this._deviceApiService.deleteDevice(device.id).subscribe(() => this.fetchDevices());
+    this._deviceApiService.deleteDevice(device.id).subscribe(() => this._fetchDevices());
+  }
+
+  private _fetchDevices(): void {
+    const searchParameters: SearchDeviceType = {
+      ...(this.searchParametersFormGroup.value as SearchDeviceType),
+      ordering: 'model',
+    };
+
+    this._deviceApiService
+      .searchDevices(searchParameters)
+      .pipe(
+        tap(() => (this.isLoading = true)),
+        finalize(() => (this.isLoading = false)),
+      )
+      .subscribe((devices: DeviceInterface[]): void => {
+        this.devices = devices;
+      });
+  }
+
+  private _fetchBrands(): void {
+    this._brandApiService
+      .searchBrands('')
+      .pipe(
+        tap(() => (this.isLoading = true)),
+        finalize(() => (this.isLoading = false)),
+      )
+      .subscribe((brands: HardwareBrandInterface[]): void => {
+        this.brands = brands;
+      });
+  }
+
+  private _fetchCategories(): void {
+    this._categoryApiService
+      .searchCategories('')
+      .pipe(
+        tap(() => (this.isLoading = true)),
+        finalize(() => (this.isLoading = false)),
+      )
+      .subscribe((categories: HardwareCategoryInterface[]): void => {
+        this.categories = categories;
+      });
   }
 }
