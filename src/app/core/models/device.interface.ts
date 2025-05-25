@@ -21,3 +21,7 @@ export interface CreateDeviceInterface {
   serialNumber: string;
   addedDate?: Date;
 }
+
+export interface UpdateDeviceInterface extends CreateDeviceInterface {
+  id: string;
+}

@@ -148,13 +148,15 @@
     (onConfirm)="handleCreateDeviceConfirm($event)"
   />
 }
-<!--@if (showUpdateDeviceDialog) {-->
-<!--  <technician-update-device-dialog-->
-<!--    [(isVisible)]="showUpdateDeviceDialog"-->
-<!--    [device]="selectedDevice!"-->
-<!--    (onConfirm)="handleUpdateCategoryConfirm(selectedDevice!)"-->
-<!--  />-->
-<!--}-->
+@if (showUpdateDeviceDialog) {
+  <technician-update-device-dialog
+    [(isVisible)]="showUpdateDeviceDialog"
+    [device]="selectedDevice!"
+    [brands]="brands"
+    [categories]="categories"
+    (onConfirm)="handleUpdateDeviceConfirm($event)"
+  />
+}
 @if (showDeviceDetailsDialog) {
   <technician-device-details-dialog
     [(isVisible)]="showDeviceDetailsDialog"

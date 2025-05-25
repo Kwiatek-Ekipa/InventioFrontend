@@ -7,7 +7,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 import { Button } from 'primeng/button';
 import { ProgressSpinner } from 'primeng/progressspinner';
 import { ButtonGroup } from 'primeng/buttongroup';
-import { CreateDeviceInterface, DeviceInterface } from '@core/models/device.interface';
+import { CreateDeviceInterface, DeviceInterface, UpdateDeviceInterface } from '@core/models/device.interface';
 import { DeviceApiService } from '@core/services/api-services/device-api.service';
 import { HardwareBrandApiService, HardwareCategoryApiService } from '@core/services';
 import { HardwareBrandInterface, HardwareCategoryInterface } from '@core/models';
@@ -16,15 +16,10 @@ import { UILabelComponent } from '@ui';
 import { InputNumber } from 'primeng/inputnumber';
 import { MultiSelect } from 'primeng/multiselect';
 import { SearchDeviceType } from '@core/types';
-import {
-  CreateDeviceDialogComponent,
-} from '@features/technician/components/devices/dialogs/create-device-dialog/create-device-dialog.component';
-import {
-  DeleteDeviceDialogComponent,
-} from '@features/technician/components/devices/dialogs/delete-device-dialog/delete-device-dialog.component';
-import {
-  DeviceDetailsDialogComponent,
-} from '@features/technician/components/devices/dialogs/device-details-dialog/device-details-dialog.component';
+import { CreateDeviceDialogComponent } from '@features/technician/components/devices/dialogs/create-device-dialog/create-device-dialog.component';
+import { DeleteDeviceDialogComponent } from '@features/technician/components/devices/dialogs/delete-device-dialog/delete-device-dialog.component';
+import { DeviceDetailsDialogComponent } from '@features/technician/components/devices/dialogs/device-details-dialog/device-details-dialog.component';
+import { UpdateDeviceDialogComponent } from '@features/technician/components/devices/dialogs/update-device-dialog/update-device-dialog.component';
 
 @Component({
   selector: 'technician-devices',
@@ -44,6 +39,7 @@ import {
     CreateDeviceDialogComponent,
     DeleteDeviceDialogComponent,
     DeviceDetailsDialogComponent,
+    UpdateDeviceDialogComponent,
   ],
   templateUrl: './devices.component.html',
   styleUrl: './devices.component.scss',
@@ -140,7 +136,7 @@ export class DevicesComponent {
     this._deviceApiService.createDevice(newDevice).subscribe(() => this.fetchDevices());
   }
 
-  public handleUpdateCategoryConfirm(updatedDevice: DeviceInterface): void {
+  public handleUpdateDeviceConfirm(updatedDevice: UpdateDeviceInterface): void {
     this.showUpdateDeviceDialog = false;
     this._deviceApiService.updateDevice(updatedDevice).subscribe(() => this.fetchDevices());
   }

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { AbstractApiService } from './abstract-api.service';
-import { Observable } from 'rxjs';
-import { CreateDeviceInterface, DeviceInterface } from '@core/models/device.interface';
-import { SearchDeviceType } from '@core/types';
 import { HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { SearchDeviceType } from '@core/types';
+import { CreateDeviceInterface, DeviceInterface, UpdateDeviceInterface } from '@core/models/device.interface';
+import { AbstractApiService } from './abstract-api.service';
 
 @Injectable({
   providedIn: 'root',
@@ -57,7 +57,7 @@ export class DeviceApiService extends AbstractApiService {
     return this.$post('', brand);
   }
 
-  public updateDevice(brand: DeviceInterface): Observable<DeviceInterface> {
+  public updateDevice(brand: UpdateDeviceInterface): Observable<DeviceInterface> {
     return this.$put(`${brand.id}`, brand);
   }
 
