@@ -25,6 +25,10 @@ export const appConfig: ApplicationConfig = {
         },
       },
       translation: {
+        emptyMessage: 'Brak wyników',
+        emptyFilterMessage: 'Brak wyników',
+        emptySearchMessage: 'Brak wyników',
+        emptySelectionMessage: 'Brak wyników',
         dayNamesMin: ['Niedz', 'Pon', 'Wt', 'Śr', 'Czw', 'Pt', 'Sob'],
         monthNames: [
           'Styczeń',

@@ -7,22 +7,15 @@
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(2, 1fr);
 
-  //grid-template-areas:
-  //    'devices devices devices brands'
-  //    'devices devices devices categories';
-
   .devices {
-    //grid-area: devices;
     grid-area: 1 / 1 / 3 / 4;
   }
 
   .categories {
-    //grid-area: categories;
     grid-area: 2 / 4 / 3 / 5;
   }
 
   .brands {
-    //grid-area: brands;
     grid-area: 1 / 4 / 2 / 5;
   }
 }

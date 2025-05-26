@@ -14,7 +14,7 @@
   <div class="dialog-body">
     <p>Dodaj nową kategorię sprzętu.</p>
     <form>
-      <ui-label label="Nazwa marki">
+      <ui-label label="Nazwa kategorii">
         <input pInputText fluid type="text" [formControl]="categoryNameControl"/>
       </ui-label>
       @if (categoryNameControl.invalid && (categoryNameControl.dirty || categoryNameControl.touched)) {
