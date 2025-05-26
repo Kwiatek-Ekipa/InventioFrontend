@@ -18,16 +18,10 @@ import { MultiSelect } from 'primeng/multiselect';
 import { SearchDeviceType } from '@core/types';
 import {
   CreateDeviceDialogComponent,
-} from '@features/technician/components/devices/dialogs/create-device-dialog/create-device-dialog.component';
-import {
   DeleteDeviceDialogComponent,
-} from '@features/technician/components/devices/dialogs/delete-device-dialog/delete-device-dialog.component';
-import {
   DeviceDetailsDialogComponent,
-} from '@features/technician/components/devices/dialogs/device-details-dialog/device-details-dialog.component';
-import {
   UpdateDeviceDialogComponent,
-} from '@features/technician/components/devices/dialogs/update-device-dialog/update-device-dialog.component';
+} from '@features/technician/components/hardware/dialogs/device';
 
 @Component({
   selector: 'technician-devices',

@@ -18,7 +18,7 @@ export const technicianNavigationItems: MenuItem[] = [
       {
         label: 'Urządzenia',
         icon: 'pi pi-desktop',
-        routerLink: '/technician/devices',
+        routerLink: '/technician/hardware',
       },
       {
         label: 'Użytkownicy',

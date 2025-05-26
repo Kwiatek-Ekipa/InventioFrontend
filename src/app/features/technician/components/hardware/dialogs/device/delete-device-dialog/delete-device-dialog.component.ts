@@ -2,10 +2,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Button } from 'primeng/button';
 import { Dialog } from 'primeng/dialog';
 import { DeviceInterface } from '@core/models/device.interface';
+import { IrreversibleOperationTagComponent } from '@ui';
 import {
   DeviceDetailsComponent,
-} from '@features/technician/components/devices/device-details/device-details.component';
-import { IrreversibleOperationTagComponent } from '@ui';
+} from '@features/technician/components/hardware/device-details/device-details.component';
 
 @Component({
   selector: 'technician-delete-device-dialog [isVisible] [device]',

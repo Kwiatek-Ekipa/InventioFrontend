@@ -13,13 +13,9 @@ import { CreateHardwareCategoryInterface, HardwareBrandInterface, HardwareCatego
 import { HardwareCategoryApiService } from '@core/services';
 import {
   CreateCategoryDialogComponent,
-} from '@features/technician/components/devices/dialogs/create-category-dialog/create-category-dialog.component';
-import {
-  UpdateCategoryDialogComponent,
-} from '@features/technician/components/devices/dialogs/update-category-dialog/update-category-dialog.component';
-import {
   DeleteCategoryDialogComponent,
-} from '@features/technician/components/devices/dialogs/delete-category-dialog/delete-category-dialog.component';
+  UpdateCategoryDialogComponent,
+} from '@features/technician/components/hardware/dialogs/category';
 
 @Component({
   selector: 'technician-categories',

@@ -12,14 +12,10 @@ import { Button } from 'primeng/button';
 import { ProgressSpinner } from 'primeng/progressspinner';
 import { ButtonGroup } from 'primeng/buttongroup';
 import {
-  DeleteBrandDialogComponent,
-} from '@features/technician/components/devices/dialogs/delete-brand-dialog/delete-brand-dialog.component';
-import {
   CreateBrandDialogComponent,
-} from '@features/technician/components/devices/dialogs/create-brand-dialog/create-brand-dialog.component';
-import {
+  DeleteBrandDialogComponent,
   UpdateBrandDialogComponent,
-} from '@features/technician/components/devices/dialogs/update-brand-dialog/update-brand-dialog.component';
+} from '@features/technician/components/hardware/dialogs/brand';
 
 @Component({
   selector: 'technician-brands',
@@ -55,7 +51,6 @@ export class BrandsComponent {
   private readonly _DEBOUNCE_TIME_MS = 300;
 
   public constructor(private _brandsApiService: HardwareBrandApiService) {
-
     this.searchControl.valueChanges
       .pipe(debounceTime(this._DEBOUNCE_TIME_MS), distinctUntilChanged())
       .subscribe((): void => this._fetchBrands());

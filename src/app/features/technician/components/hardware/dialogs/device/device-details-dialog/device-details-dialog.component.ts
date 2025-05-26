@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Dialog } from 'primeng/dialog';
 import { DeviceInterface } from '@core/models/device.interface';
+import { Button } from 'primeng/button';
 import {
   DeviceDetailsComponent,
-} from '@features/technician/components/devices/device-details/device-details.component';
-import { Button } from 'primeng/button';
+} from '@features/technician/components/hardware/device-details/device-details.component';
 
 @Component({
   selector: 'technician-device-details-dialog [isVisible] [device]',
