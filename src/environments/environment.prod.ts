@@ -1,3 +1,3 @@
 export const environment = {
-  backend: 'https://future.api.domain.com',
+  backend: 'inventio-backend.blueflower-c130f851.westeurope.azurecontainerapps.io/api',
 };
