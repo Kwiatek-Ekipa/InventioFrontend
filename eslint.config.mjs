@@ -178,7 +178,8 @@ export default defineConfig([
         {
           selector: 'classProperty',
           modifiers: ['private', 'readonly'],
-          leadingUnderscore: 'allow'
+          format: ['camelCase', 'UPPER_CASE'],
+          leadingUnderscore: 'require'
         },
       ],
 
