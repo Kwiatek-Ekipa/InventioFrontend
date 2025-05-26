@@ -146,11 +146,6 @@ export default defineConfig([
           format: ['camelCase'],
         },
         {
-          selector: ['field'],
-          modifiers: ['readonly'],
-          format: ['camelCase', 'UPPER_CASE'],
-        },
-        {
           selector: ['memberLike'],
           modifiers: ['protected'],
           format: ['camelCase'],
@@ -174,6 +169,16 @@ export default defineConfig([
           selector: ['variable'],
           modifiers: ['global'],
           format: ['UPPER_CASE', 'camelCase', 'PascalCase'],
+        },
+        {
+          selector: 'classProperty',
+          modifiers: ['readonly'],
+          format: ['camelCase', 'UPPER_CASE'],
+        },
+        {
+          selector: 'classProperty',
+          modifiers: ['private', 'readonly'],
+          leadingUnderscore: 'allow'
         },
       ],
 
