@@ -42,6 +42,7 @@ export default defineConfig([
 
     rules: {
       'prettier/prettier': ['warn', {'endOfLine': 'auto'}],
+      '@angular-eslint/no-output-on-prefix': 'off',
       '@stylistic/ts/indent': ['warn', 2],
       '@stylistic/ts/padding-line-between-statements': [
         'warn',
@@ -163,6 +164,22 @@ export default defineConfig([
           format: ['PascalCase'],
           types: ['boolean'],
           prefix: ['is', 'are', 'has', 'can', 'show', 'should', 'needs', 'must'],
+        },
+        {
+          selector: ['variable'],
+          modifiers: ['global'],
+          format: ['UPPER_CASE', 'camelCase', 'PascalCase'],
+        },
+        {
+          selector: 'classProperty',
+          modifiers: ['readonly'],
+          format: ['camelCase', 'UPPER_CASE'],
+        },
+        {
+          selector: 'classProperty',
+          modifiers: ['private', 'readonly'],
+          format: ['camelCase', 'UPPER_CASE'],
+          leadingUnderscore: 'require'
         },
       ],
 

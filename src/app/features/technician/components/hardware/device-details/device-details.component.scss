@@ -1,0 +1,27 @@
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  tr {
+    &:last-child {
+      td {
+        border-bottom: none;
+      }
+    }
+
+    td {
+      padding: var(--p-datatable-body-cell-padding);
+      border-bottom: 1px solid var(--p-datatable-body-cell-border-color);
+      vertical-align: text-top;
+
+      &:first-child {
+        text-wrap: nowrap;
+      }
+
+      &:last-child {
+        width: 100%;
+        font-weight: bold;
+      }
+    }
+  }
+}

@@ -8,11 +8,12 @@ import { ThemePreset } from '@core/theme/preset';
 import { refreshInterceptor, tokenInterceptor } from '@core/interceptors';
 
 import { routes } from './app.routes';
+import { dateInterceptor } from '@core/interceptors/date.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideHttpClient(withInterceptors([tokenInterceptor, refreshInterceptor])),
+    provideHttpClient(withInterceptors([tokenInterceptor, refreshInterceptor, dateInterceptor])),
     provideRouter(routes),
     provideAnimationsAsync(),
     providePrimeNG({
@@ -22,6 +23,28 @@ export const appConfig: ApplicationConfig = {
         options: {
           darkModeSelector: false,
         },
+      },
+      translation: {
+        emptyMessage: 'Brak wyników',
+        emptyFilterMessage: 'Brak wyników',
+        emptySearchMessage: 'Brak wyników',
+        emptySelectionMessage: 'Brak wyników',
+        dayNamesMin: ['Niedz', 'Pon', 'Wt', 'Śr', 'Czw', 'Pt', 'Sob'],
+        monthNames: [
+          'Styczeń',
+          'Luty',
+          'Marzec',
+          'Kwiecień',
+          'Maj',
+          'Czerwiec',
+          'Lipiec',
+          'Sierpiń',
+          'Wrzesień',
+          'Październik',
+          'Listopad',
+          'Grudzień',
+        ],
+        monthNamesShort: ['Sty', 'Lut', 'Mar', 'Kwi', 'Maj', 'Cze', 'Lip', 'Sie', 'Wrz', 'Paź', 'Lis', 'Gru'],
       },
     }),
   ],

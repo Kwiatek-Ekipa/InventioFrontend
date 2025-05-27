@@ -1,0 +1,25 @@
+<p-dialog
+  [visible]="isVisible"
+  (visibleChange)="isVisibleChange.emit($event)"
+  [modal]="true"
+  [draggable]="false"
+  [style]="{ width: '500px' }"
+>
+  <ng-template #header>
+    <h3>
+      <i class="pi pi-trash"></i>
+      Usuń kategorię
+    </h3>
+  </ng-template>
+  <div class="dialog-body">
+    <ui-irreversible-operation-tag/>
+    <p>
+      Czy na pewno chcesz usunąć kategorię sprzętu <b>{{ category.name }}</b>?
+      Spowoduje to usunięcie wszystkich urządzeń należących do tej kategorii z systemu.
+    </p>
+  </div>
+  <ng-template #footer>
+    <p-button (click)="handleDeleteBrandConfirm()" label="Usuń" severity="danger"/>
+    <p-button (click)="handleDeleteBrandCancel()" label="Anuluj" severity="secondary"/>
+  </ng-template>
+</p-dialog>

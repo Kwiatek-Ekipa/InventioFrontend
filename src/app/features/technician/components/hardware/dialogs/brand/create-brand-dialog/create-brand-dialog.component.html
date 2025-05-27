@@ -1,0 +1,29 @@
+<p-dialog
+    [visible]="isVisible"
+    (visibleChange)="isVisibleChange.emit($event)"
+    [modal]="true"
+    [draggable]="false"
+    [style]="{ width: '500px' }"
+>
+  <ng-template #header>
+    <h3>
+      <i class="pi pi-plus"></i>
+      Dodaj markę
+    </h3>
+  </ng-template>
+  <div class="dialog-body">
+    <p>Dodaj nową markę sprzętu.</p>
+    <form>
+      <ui-label label="Nazwa marki">
+        <input pInputText fluid type="text" [formControl]="brandNameControl"/>
+      </ui-label>
+      @if (brandNameControl.invalid && (brandNameControl.dirty || brandNameControl.touched)) {
+        <small class="error">Pole jest wymagane.</small>
+      }
+    </form>
+  </div>
+  <ng-template #footer>
+    <p-button (click)="handleCreateBrandConfirm()" label="Dodaj"/>
+    <p-button (click)="handleCreateBrandCancel()" label="Anuluj" severity="secondary"/>
+  </ng-template>
+</p-dialog>

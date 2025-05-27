@@ -1,0 +1,19 @@
+<p-dialog
+  [visible]="isVisible"
+  (visibleChange)="isVisibleChange.emit($event)"
+  [modal]="true"
+  [draggable]="false"
+  [style]="{ width: '600px' }"
+>
+  <ng-template #header>
+    <h3>
+      <i class="pi pi-info-circle"></i>
+      Szczegóły urządzenia
+    </h3>
+  </ng-template>
+  <technician-device-details [device]="device"/>
+  <ng-template #footer>
+    <p-button (click)="handleUpdateDevice()" icon="pi pi-pencil" label="Edytuj"/>
+    <p-button (click)="handleDeleteDevice()" icon="pi pi-trash" label="Usuń" severity="danger"/>
+  </ng-template>
+</p-dialog>

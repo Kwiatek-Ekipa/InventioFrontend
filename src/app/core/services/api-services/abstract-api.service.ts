@@ -1,3 +1,4 @@
+import { inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -5,15 +6,16 @@ import { environment } from '@env';
 
 export abstract class AbstractApiService {
   private readonly _baseUrl: string = environment.backend;
+  private _httpClient: HttpClient = inject(HttpClient);
 
-  protected constructor(
-    private _httpClient: HttpClient,
-    url: string = ''
-  ) {
+  protected constructor(url: string = '') {
     this._baseUrl += '/' + url;
   }
 
-  protected $get<T>(endpoint: string, params?: HttpParams): Observable<T> {
+  protected $get<T>(
+    endpoint: string,
+    params?: HttpParams | Record<string, string | number | boolean | readonly (string | number | boolean)[]>,
+  ): Observable<T> {
     return this._httpClient.get<T>(this._createUrl(endpoint), { params });
   }
 

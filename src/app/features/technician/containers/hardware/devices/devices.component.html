@@ -1,0 +1,174 @@
+<p-card styleClass="container">
+  <div class="container">
+    <p-table [value]="devices" [loading]="isLoading" [scrollable]="true" [paginator]="true" [rows]="8">
+      <ng-template #caption>
+        <div class="caption">
+          <div class="header">
+            <h2>Urządzenia</h2>
+            <p-button
+              icon="pi pi-plus"
+              iconPos="left"
+              label="Dodaj urządzenie"
+              (onClick)="showCreateDeviceDialog = true"
+            />
+          </div>
+          <p-fieldset legend="Filtry" [toggleable]="true" collapsed="true">
+            <form [formGroup]="searchParametersFormGroup" class="filters">
+              <ui-label label="Nazwa modelu">
+                <input pInputText type="text" formControlName="model"/>
+              </ui-label>
+              <ui-label label="Numer seryjny">
+                <input pInputText type="text" formControlName="serialNumber"/>
+              </ui-label>
+              <ui-label label="Min. rok produkcji">
+                <p-input-number type="number" [useGrouping]="false" formControlName="yearOfProductionGte"/>
+              </ui-label>
+              <ui-label label="Max. rok produkcji">
+                <p-input-number type="number" [useGrouping]="false" formControlName="yearOfProductionLte"/>
+              </ui-label>
+              <div class="multiselect-group">
+                <ui-label label="Marka">
+                  <p-multi-select
+                    [options]="brands"
+                    optionLabel="name"
+                    optionValue="id"
+                    display="chip"
+                    formControlName="brandId"
+                    styleClass="multiselect"
+                  />
+                </ui-label>
+                <ui-label label="Kategoria">
+                  <p-multi-select
+                    [options]="categories"
+                    optionLabel="name"
+                    optionValue="id"
+                    display="chip"
+                    formControlName="categoryId"
+                    styleClass="multiselect"
+                  />
+                </ui-label>
+              </div>
+            </form>
+          </p-fieldset>
+        </div>
+      </ng-template>
+      <ng-template #header>
+        <tr>
+          <th pSortableColumn="model">
+            Model
+            <p-sortIcon field="model"/>
+          </th>
+          <th pSortableColumn="brand.name">
+            Marka
+            <p-sortIcon field="brand.name"/>
+          </th>
+          <th pSortableColumn="category.name">
+            Kategoria
+            <p-sortIcon field="category.name"/>
+          </th>
+          <th pSortableColumn="yearOfProduction">
+            Rok produkcji
+            <p-sortIcon field="yearOfProduction"/>
+          </th>
+          <th pSortableColumn="serialNumber">
+            Numer seryjny
+            <p-sortIcon field="serialNumber"/>
+          </th>
+          <th style="width: 120px"></th>
+        </tr>
+      </ng-template>
+      <ng-template #body let-device>
+        <tr>
+          <td>
+            {{ device.model }}
+          </td>
+          <td>
+            {{ device.brand.name }}
+          </td>
+          <td>
+            {{ device.category.name }}
+          </td>
+          <td>
+            {{ device.yearOfProduction }}
+          </td>
+          <td>
+            {{ device.serialNumber }}
+          </td>
+          <td>
+            <p-button-group>
+              <p-button
+                type="button"
+                icon="pi pi-pencil"
+                text
+                rounded
+                severity="primary"
+                (onClick)="handleUpdateDevice(device)"
+              />
+              <p-button
+                type="button"
+                icon="pi pi-info-circle"
+                text
+                rounded
+                severity="info"
+                (onClick)="handleShowDeviceDetails(device)"
+              />
+              <p-button
+                type="button"
+                icon="pi pi-trash"
+                text
+                rounded
+                severity="danger"
+                (onClick)="handleDeleteDevice(device)"
+              />
+            </p-button-group>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template #loadingbody>
+        <tr>
+          <td colspan="6">
+            <p-progress-spinner/>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template #emptymessage>
+        <tr>
+          <td colspan="2">Brak wyników.</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</p-card>
+
+@if (showCreateDeviceDialog) {
+  <technician-create-device-dialog
+    [(isVisible)]="showCreateDeviceDialog"
+    [brands]="brands"
+    [categories]="categories"
+    (onConfirm)="handleCreateDeviceConfirm($event)"
+  />
+}
+@if (showUpdateDeviceDialog) {
+  <technician-update-device-dialog
+    [(isVisible)]="showUpdateDeviceDialog"
+    [device]="selectedDevice!"
+    [brands]="brands"
+    [categories]="categories"
+    (onConfirm)="handleUpdateDeviceConfirm($event)"
+  />
+}
+@if (showDeviceDetailsDialog) {
+  <technician-device-details-dialog
+    [(isVisible)]="showDeviceDetailsDialog"
+    [device]="selectedDevice!"
+    (onDeleteDevice)="showDeleteDeviceDialog = true"
+    (onUpdateDevice)="showUpdateDeviceDialog = true"
+  />
+}
+@if (showDeleteDeviceDialog) {
+  <technician-delete-device-dialog
+    [(isVisible)]="showDeleteDeviceDialog"
+    [device]="selectedDevice!"
+    (onConfirm)="handleDeleteDeviceConfirm(selectedDevice!)"
+  />
+}
