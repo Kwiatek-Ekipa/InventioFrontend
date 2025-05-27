@@ -1,0 +1,29 @@
+<p-dialog
+  [visible]="isVisible"
+  (visibleChange)="isVisibleChange.emit($event)"
+  [modal]="true"
+  [draggable]="false"
+  [style]="{ width: '500px' }"
+>
+  <ng-template #header>
+    <h3>
+      <i class="pi pi-plus"></i>
+      Dodaj kategorię
+    </h3>
+  </ng-template>
+  <div class="dialog-body">
+    <p>Dodaj nową kategorię sprzętu.</p>
+    <form>
+      <ui-label label="Nazwa kategorii">
+        <input pInputText fluid type="text" [formControl]="categoryNameControl"/>
+      </ui-label>
+      @if (categoryNameControl.invalid && (categoryNameControl.dirty || categoryNameControl.touched)) {
+        <small class="error">Pole jest wymagane.</small>
+      }
+    </form>
+  </div>
+  <ng-template #footer>
+    <p-button (click)="handleCreateCategoryConfirm()" label="Dodaj"/>
+    <p-button (click)="handleCreateCategoryCancel()" label="Anuluj" severity="secondary"/>
+  </ng-template>
+</p-dialog>

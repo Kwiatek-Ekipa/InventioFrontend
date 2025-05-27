@@ -1,0 +1,34 @@
+<p-fieldset legend="Urządzenie">
+  <table class="user-table">
+    <tr>
+      <td>Model:</td>
+      <td>{{ device.model }}</td>
+    </tr>
+    <tr>
+      <td>Marka:</td>
+      <td>{{ device.brand.name }}</td>
+    </tr>
+    <tr>
+      <td>Numer seryjny:</td>
+      <td>{{ device.serialNumber }}</td>
+    </tr>
+    <tr>
+      <td>Kategoria:</td>
+      <td>{{ device.category.name }}</td>
+    </tr>
+    <tr>
+      <td>Rok produkcji:</td>
+      <td>{{ device.yearOfProduction }}</td>
+    </tr>
+    <tr>
+      <td>Dodane przez:</td>
+      <td>
+        {{ device.addedBy.name }} {{ device.addedBy.surname }}
+      </td>
+    </tr>
+    <tr>
+      <td>Dodane dnia:</td>
+      <td>{{ device.addedDate | date: 'dd.MM.yyyy' }}</td>
+    </tr>
+  </table>
+</p-fieldset>

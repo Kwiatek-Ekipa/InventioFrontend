@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import {
   DashboardPageComponent,
-  DevicesPageComponent,
+  HardwarePageComponent,
   SettingsPageComponent,
   StocktakingPageComponent,
   UsersPageComponent,
@@ -13,8 +13,8 @@ export default [
     component: DashboardPageComponent,
   },
   {
-    path: 'devices',
-    component: DevicesPageComponent,
+    path: 'hardware',
+    component: HardwarePageComponent,
   },
   {
     path: 'users',

@@ -5,7 +5,7 @@ import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import { LocalStorageKeyEnum } from '@core/enums';
 import { AccessTokenInterface, LoginInterface, TokenInterface, UserInfoInterface } from '@core/interfaces';
 
-import { AuthApiService } from './auth-api.service';
+import { AuthApiService } from '@core/services/api-services';
 
 @Injectable({
   providedIn: 'root',
