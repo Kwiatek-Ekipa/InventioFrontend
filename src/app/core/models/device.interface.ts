@@ -1,6 +1,6 @@
-import { HardwareBrandInterface } from '@core/models/hardware-brand.interface';
-import { HardwareCategoryInterface } from '@core/models/hardware-category.interface';
-import { UserInterface } from '@core/models/user.interface';
+import { HardwareBrandInterface } from './hardware-brand.interface';
+import { HardwareCategoryInterface } from './hardware-category.interface';
+import { SimpleAccountInterface } from './account.interface';
 
 export interface DeviceInterface {
   id: string;
@@ -10,7 +10,7 @@ export interface DeviceInterface {
   yearOfProduction: number;
   serialNumber: string;
   addedDate: Date;
-  addedBy: UserInterface;
+  addedBy: SimpleAccountInterface;
 }
 
 export interface CreateDeviceInterface {
