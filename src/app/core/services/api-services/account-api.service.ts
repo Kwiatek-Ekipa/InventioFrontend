@@ -11,8 +11,8 @@ export class AccountApiService extends AbstractApiService {
     super('accounts');
   }
 
-  public searchAccounts(name: string): Observable<AccountInterface[]> {
-    return this.$get('', { name });
+  public searchAccounts(query: string): Observable<AccountInterface[]> {
+    return this.$get('', { q: query });
   }
 
   public getAccount(id: string): Observable<AccountInterface> {
