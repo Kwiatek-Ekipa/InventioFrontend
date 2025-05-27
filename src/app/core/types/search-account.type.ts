@@ -1,4 +1,4 @@
 export type SearchAccountType = {
-  q: string;
-  roleId: string[];
+  q?: string;
+  roleId?: string[];
 };
