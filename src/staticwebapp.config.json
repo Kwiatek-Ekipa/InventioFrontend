@@ -1,5 +1,5 @@
 {
   "navigationFallback": {
-    "rewrite": "dist/inventio-frontend/browser/index.html"
+    "rewrite": "index.html"
   }
 }
