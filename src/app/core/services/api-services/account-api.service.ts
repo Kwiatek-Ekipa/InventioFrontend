@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AccountInterface } from '@core/models';
+import { SearchAccountType } from '@core/types';
 import { AbstractApiService } from './abstract-api.service';
 
 @Injectable({
@@ -11,8 +12,8 @@ export class AccountApiService extends AbstractApiService {
     super('accounts');
   }
 
-  public searchAccounts(query: string): Observable<AccountInterface[]> {
-    return this.$get('', { q: query });
+  public searchAccounts(searchParameters: SearchAccountType): Observable<AccountInterface[]> {
+    return this.$get('', searchParameters);
   }
 
   public getAccount(id: string): Observable<AccountInterface> {
